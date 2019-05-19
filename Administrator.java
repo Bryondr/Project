@@ -9,11 +9,11 @@ public class Administrator
 {
     Calendar cal= Calendar.getInstance();
     int day = cal.get(Calendar.DAY_OF_MONTH);
-    int month = cal.get(Calendar.MONTH);
+    int month = cal.get(Calendar.MONTH)+1;
 
     public Administrator(UserClass user)
     {
-        if (day == user.getDayOfBirth() && month+1 == user.getMonthOfBirth())
+        if (day == user.getDayOfBirth() && month == user.getMonthOfBirth())
         {
             //Eğer üstteki şartlar karşılıyorsa userin notification boxuna iyiki doğdun mesajı gidecek!!
             user.SendToNotificationBox("Happy Birthday "+ user.getName());
