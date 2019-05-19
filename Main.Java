@@ -2,10 +2,13 @@ public class Main
 {
     public static void main(String args[])
     {
-        //Admin doğum gününü kontrol ediyor register classından gelecek user ile bütün parçalar tamam olacak
         Administrator Admin = new Administrator();
-        UserClass user = Register.Registering();
+        Register Registerer = new Register();
+        UserPanel Panel = new UserPanel();
+        
+        UserClass user = Registerer.Registering();
         Admin.CallBirthday(user);
+        Panel.SelectionsWindow(user);
 
     }
 }
