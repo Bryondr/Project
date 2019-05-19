@@ -10,19 +10,22 @@ public class Register
         System.out.println("Please fill the blanks with valid answers.");
 
         UserClass user = new UserClass();
-        
+
+        System.out.println("Please enter your username:\t");
         String name = scanner.nextLine();
         user.setName(name);
         System.out.println("User Name\t:" + user.getName());
-        
+
+        System.out.println("Please enter your email:\t");
         String email = scanner.nextLine();
         user.setEmail(email);
         System.out.println("\nE-mail\t:" + user.getEmail());
-        
-        
+
+
         System.out.println("\nPlease enter your birth date one by one:");
-        
-        //Getting day informations
+        System.out.println("Day/Month/Year\n");
+
+        //Getting day info
         int dayOfBirth = scanner.nextInt();
         scanner.nextLine(); //Dummy
         user.setDayOfBirth(dayOfBirth);
@@ -32,13 +35,13 @@ public class Register
             System.out.println("Day\t:" + user.getDayOfBirth());
         }
 
-       //Getting month informations
+       //Getting month info
         int monthOfBirth = scanner.nextInt();
         scanner.nextLine(); //Dummy
         user.setMonthOfBirth(monthOfBirth);
         System.out.println("Month\t:" + user.getMonthOfBirth());
 
-        //Getting year informations
+        //Getting year info
         int yearOfBirth = scanner.nextInt();
         scanner.nextLine();//Dummy
         user.setYearOfBirth(yearOfBirth);
