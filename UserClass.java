@@ -76,6 +76,10 @@ public class UserClass
 
     //Other methods
     
-
+    public void SendToNotificationBox(String notification)
+        {
+            //gets notification and sends it to user
+            notificationBox.add(notification); //!!NASIL KULLANILDIĞINI ÖĞRENİP TEKRARDAN DÖNECEĞİM!!
+        }
 
 }
