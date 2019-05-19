@@ -16,7 +16,8 @@ public class Administrator
         if (day == user.getDayOfBirth() && month+1 == user.getMonthOfBirth())
         {
             //Eğer üstteki şartlar karşılıyorsa userin notification boxuna iyiki doğdun mesajı gidecek!!
-            // !!Burayı şimdilik böyle bırakıyorum notificationa bi çözüm bulana kadar!!
+            user.SendToNotificationBox("Happy Birthday "+ user.getName());
+            //Çalışıp çalışılmadığı kontrol edilecek!!!!!
         }
 
     }
