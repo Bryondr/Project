@@ -1,6 +1,6 @@
 public class UserPanel
 {
-    public void Run(UserClass user)
+    public void SelectionsWindow(UserClass user)
     {
         System.out.println("Welcome " + user.getName() + ", please choose an operation;");
         System.out.println("1. Show Inbox");
