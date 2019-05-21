@@ -8,7 +8,7 @@ public class UserClass
     private int dayOfBirth;
     private int monthOfBirth;
     private int yearOfBirth;
-    private ArrayList notificationBox;
+    private ArrayList<String> notificationBox;
     private ArrayList postList;
     private ArrayList timeLine;
     private ArrayList favPosts;
@@ -16,6 +16,12 @@ public class UserClass
     private String place;
     private ArrayList incoming;
     private ArrayList outgoing;
+
+
+    public UserClass ()
+    {
+
+    }
 
     public UserClass(String name, String email, int dayOfBirth,int monthOfBirth,int yearOfBirth, ArrayList notificationBox, ArrayList postList, ArrayList timeLine, ArrayList favPosts, ArrayList followedList, String place, ArrayList incoming, ArrayList outgoing)
     {
@@ -75,11 +81,18 @@ public class UserClass
     public void setYearOfBirth(int yearOfBirth) { this.yearOfBirth = yearOfBirth; }
 
     //Other methods
-    
-    public void SendToNotificationBox(String notification)
-        {
-            //gets notification and sends it to user
-            notificationBox.add(notification); //!!NASIL KULLANILDIĞINI ÖĞRENİP TEKRARDAN DÖNECEĞİM!!
-        }
 
+    public void SendToNotificationBox(String notification)
+    {
+        //gets notification and sends it to user
+        notificationBox.add(notification); //!!NASIL KULLANILDIĞINI ÖĞRENİP TEKRARDAN DÖNECEĞİM!!
+    }
+
+    public void ShowNotifications()
+    {
+        for (int i = 0; i < notificationBox.size(); i++)
+            {
+                notificationBox.get(i);
+            }
+    }
 }
