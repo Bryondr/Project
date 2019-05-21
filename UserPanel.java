@@ -1,6 +1,6 @@
 public class UserPanel
 {
-    public void Run(UserClass user)
+    public void SelectionsWindow(UserClass user)
     {
         System.out.println("Welcome " + user.getName() + ", please choose an operation;");
         System.out.println("1. Show Inbox");
@@ -10,6 +10,9 @@ public class UserPanel
         System.out.println("5. Show timeline");
         System.out.println("6. Show contact list");
         System.out.println("7. Show Notifications");
+        user.ShowNotifications(); //Bu böyle kullanılmayacak sadece
+                                 // 7.seçenek seçilirse bu method çalışacak ona göre implement edilmeli!!!!
+                                // Switch Case bu işe uygun!!!
         System.out.println("8. Follow People");
 
     }
