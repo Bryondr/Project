@@ -1,6 +1,4 @@
 package project;
 
-public class MainPage extends Post {
-      
-    
+public class MainPage extends Post {    
 }
