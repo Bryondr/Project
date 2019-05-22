@@ -5,14 +5,14 @@ public class UserClass
     //Fields
     private String name;
     private String email;
-    private int dayOfBirth;
+    private int dayOfBirth = 0;
     private int monthOfBirth;
     private int yearOfBirth;
     private ArrayList<String> notificationBox;
     private ArrayList postList;
     private ArrayList timeLine;
     private ArrayList favPosts;
-    private ArrayList followedList;
+    private ArrayList<UserClass> followedList;
     private String place;
     private ArrayList incoming;
     private ArrayList outgoing;
@@ -23,7 +23,7 @@ public class UserClass
 
     }
 
-    public UserClass(String name, String email, int dayOfBirth,int monthOfBirth,int yearOfBirth, ArrayList notificationBox, ArrayList postList, ArrayList timeLine, ArrayList favPosts, ArrayList followedList, String place, ArrayList incoming, ArrayList outgoing)
+    public UserClass(String name, String email, int dayOfBirth,int monthOfBirth,int yearOfBirth, ArrayList<String> notificationBox, ArrayList postList, ArrayList timeLine, ArrayList favPosts, ArrayList<UserClass> followedList, String place, ArrayList incoming, ArrayList outgoing)
     {
         this.name = name;
         this.email = email;
@@ -47,7 +47,7 @@ public class UserClass
     public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email; }
 
-    public ArrayList getNotificationBox() { return notificationBox; }
+    public ArrayList<String> getNotificationBox() { return notificationBox; }
     public void setNotificationBox(ArrayList notificationBox) { this.notificationBox = notificationBox; }
 
     public ArrayList getPostList() { return postList; }
@@ -59,8 +59,8 @@ public class UserClass
     public ArrayList getFavPosts() { return favPosts; }
     public void setFavPosts(ArrayList favPosts) { this.favPosts = favPosts; }
 
-    public ArrayList getFollowedList() { return followedList; }
-    public void setFollowedList(ArrayList followedList) { this.followedList = followedList; }
+    public ArrayList<UserClass> getFollowedList() { return followedList; }
+    public void setFollowedList(ArrayList<UserClass> followedList) { this.followedList = followedList; }
 
     public String getPlace() { return place; }
     public void setPlace(String place) { this.place = place; }
@@ -92,7 +92,7 @@ public class UserClass
     {
         for (int i = 0; i < notificationBox.size(); i++)
             {
-                notificationBox.get(i);
+                System.out.println(notificationBox.get(i));
             }
     }
 }
