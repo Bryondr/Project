@@ -1,52 +1,69 @@
-import java.util.Scanner;
+package project;
 
+import java.util.Scanner;
 
 public class Register
 {
+    
+   public int a;
     public UserClass Registering()
     {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("\t\t\t***Program Adi***\n\n");
+        
+        
+         System.out.println("\t\t\t***Our Java Project***\n\t-Bora -Ege\n");
+         
         System.out.println("Please fill the blanks with valid answers.");
 
         UserClass user = new UserClass();
 
-        System.out.println("Please enter your username:\t");
+       System.out.println("User Name\t:");
         String name = scanner.nextLine();
         user.setName(name);
-        System.out.println("User Name\t:" + user.getName());
 
-        System.out.println("Please enter your email:\t");
+        System.out.println("\nE-mail\t:");
         String email = scanner.nextLine();
         user.setEmail(email);
-        System.out.println("\nE-mail\t:" + user.getEmail());
-
-
+        
         System.out.println("\nPlease enter your birth date one by one:");
-        System.out.println("Day/Month/Year\n");
-
         //Getting day info
+        System.out.println("Day\t: " );
         int dayOfBirth = scanner.nextInt();
-        scanner.nextLine(); //Dummy
         user.setDayOfBirth(dayOfBirth);
-        System.out.println("Day\t:" + user.getDayOfBirth());
-        while(user.getDayOfBirth()<1 && user.getDayOfBirth()>31){
-            System.out.println("This day of birth value is not valid, please enter a valid day value");
-            System.out.println("Day\t:" + user.getDayOfBirth());
+        scanner.nextLine(); //Dummy
+        while(user.getDayOfBirth()<1 || user.getDayOfBirth()>31){
+            System.out.println("This day of birth value is not valid, please enter a valid day value\t: ");
+            System.out.println("Day\t: " );
+            dayOfBirth = scanner.nextInt();
+            user.setDayOfBirth(dayOfBirth);
+            scanner.nextLine(); //Dummy
+
+        }
+        //Getting month info
+        System.out.println("Month\t: ");
+        int monthOfBirth = scanner.nextInt();
+        user.setMonthOfBirth(monthOfBirth);
+        scanner.nextLine(); //Dummy
+        while(user.getMonthOfBirth()<1 || user.getMonthOfBirth()>12){
+            System.out.println("This month of birth value is not valid, please enter a valid month value\t: ");
+            System.out.println("Month\t: ");
+            monthOfBirth = scanner.nextInt();
+            user.setMonthOfBirth(monthOfBirth);
+            scanner.nextLine(); //Dummy
         }
 
-       //Getting month info
-        int monthOfBirth = scanner.nextInt();
-        scanner.nextLine(); //Dummy
-        user.setMonthOfBirth(monthOfBirth);
-        System.out.println("Month\t:" + user.getMonthOfBirth());
-
         //Getting year info
+        System.out.println("Year\t: ");
         int yearOfBirth = scanner.nextInt();
-        scanner.nextLine();//Dummy
         user.setYearOfBirth(yearOfBirth);
-        System.out.println("Year\t:" + user.getYearOfBirth());
-
+        scanner.nextLine();//Dummy
+        while(user.getYearOfBirth() <= 1923 || user.getYearOfBirth() > 2012 ){
+            System.out.println("This year of birth value is not valid, please enter a valid year value\t: ");
+            System.out.println("Year\t: ");
+            yearOfBirth = scanner.nextInt();
+            user.setYearOfBirth(yearOfBirth);
+            scanner.nextLine();//Dummy
+        }
         return user;
     }
 }
