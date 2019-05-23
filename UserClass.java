@@ -5,7 +5,7 @@ public class UserClass
     //Fields
     private String name;
     private String email;
-    private int dayOfBirth = 0;
+    private int dayOfBirth;
     private int monthOfBirth;
     private int yearOfBirth;
     private ArrayList<String> notificationBox;
