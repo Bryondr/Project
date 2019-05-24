@@ -11,6 +11,7 @@ public class Administrator
     
     public void CallBirthday(UserClass user)
     {
+        //Checks if todays date and users birthday is same
         if (day == user.getDayOfBirth() && month+1 == user.getMonthOfBirth())
         {
             user.SendToNotificationBox("Happy Birthday "+ user.getName());
