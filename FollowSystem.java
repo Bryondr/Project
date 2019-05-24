@@ -17,7 +17,7 @@ public class FollowSystem
         user1.setFollowedList(list);
 
     }
-
+    
     public void Unfollow(UserClass user1,UserClass user2)
     {
         ArrayList<UserClass> list;
@@ -26,7 +26,7 @@ public class FollowSystem
         user1.setFollowedList(list);
     }
 
-
+    //Controls if user follows another selected user
     public boolean IsFollow(UserClass user1,UserClass user2)
     {
         for (int i = 0; i < user1.getFollowedList().size(); i++)
@@ -39,6 +39,7 @@ public class FollowSystem
         return false;
     }
 
+    //controls if each user follows each other
     public boolean IsEachOtherFollowing(UserClass user1,UserClass user2)
     {
         for (int i =0; i< user1.getFollowedList().size();i++)
@@ -59,8 +60,4 @@ public class FollowSystem
 
 
     }
-
-
-
-
 }
