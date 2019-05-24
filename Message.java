@@ -24,7 +24,6 @@ public class Message
     public void SendMessage(UserClass user1,UserClass user2,String message,String content)
     {
         ArrayList<Message> list = new ArrayList<>();
-        ArrayList<String> list2 = new ArrayList<>();
         FollowSystem System = new FollowSystem();
 
         if(System.IsEachOtherFollowing(user1, user2))
@@ -38,9 +37,8 @@ public class Message
             list.add(this);
             user2.setIncoming(list);
 
-            list2 = user2.getNotificationBox();
-            list2.add("You got a new message from "+user1.getName()+"\nMessage is: "+getMessage()+"\nContent is: "+getContent());
-            user2.setNotificationBox(list2);
+            user2.SendToNotificationBox("You got a new message from "+user1.getName()+"\nMessage is: "+getMessage()+"\nContent is: "+getContent());
+
         }
     }
     public void MessagingPanel (UserClass user)
