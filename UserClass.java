@@ -93,15 +93,18 @@ public class UserClass
     public void SendToNotificationBox(String notification)
     {
         //gets notification and sends it to user
-        notificationBox.add(notification); //!!NASIL KULLANILDIĞINI ÖĞRENİP TEKRARDAN DÖNECEĞİM!!
+        ArrayList<String> list = new ArrayList<>();
+        list = getNotificationBox();
+        list.add(notification);
+        setNotificationBox(list);
     }
 
     public void ShowNotifications()
     {
         for (int i = 0; i < notificationBox.size(); i++)
-            {
-                System.out.println(notificationBox.get(i));
-            }
+        {
+            System.out.println(notificationBox.get(i));
+        }
     }
 
 }
