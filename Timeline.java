@@ -1,7 +1,7 @@
 public class TimeLine {
 
 
-    //Gets all posts from timeline
+    //Gets all posts from user'stimeline
     public void getTimeLine( UserClass user ){
 
         for(int i=0; i<user.getPostList().size(); i++)
@@ -14,7 +14,7 @@ public class TimeLine {
             System.out.println("__________________");
         }
     }
-    //Gets post from timeline
+    //Gets post from user's timeline which user's select
     public void getTimeLine( UserClass user, int i )
     {
         System.out.println("__________________");
