@@ -1,3 +1,5 @@
+package project;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -27,11 +29,11 @@ public class UserPanel
         //Creates other users for our program(özellikleri değişecek)
         UserClass user1 = new UserClass("Deyan Bora Çetin", "deyan_bora@hotmail.com", 23, 01, 1999);
         UserClass user2 = new UserClass("Ege Bulut", "izciege@hotmail.com", 3, 4, 2000);
-        UserClass user3 = new UserClass("Mehmet Uslu", "mehmetUslu@gmail.com", 6, 7, 1967);
+        UserClass user3 = new UserClass("Mehmet Uslu", "mehmetamca@gmail.com", 6, 7, 1967);
         UserClass user4 = new UserClass("Ahmet Sel", "ahmetSel@hotmail.com", 31, 5, 1985);
-        UserClass user5 = new UserClass("Arzu Hepcan", "mehmetamca@hotmail.com", 1, 1, 2010);
-        UserClass user6 = new UserClass("Aslı Bekir", "mehmetamca@hotmail.com", 1, 1, 2010);
-        UserClass user7 = new UserClass("Dilan Saman", "dilan_saman@gmail.com", 1, 1, 2010);
+        UserClass user5 = new UserClass("Arzu Hepcan", "arzu_1997@hotmail.com", 1, 4, 1997);
+        UserClass user6 = new UserClass("Aslı Bekir", "asli_20062013@hotmail.com", 25, 1, 1983);
+        UserClass user7 = new UserClass("Dilan Saman", "dilan_saman@gmail.com", 20, 6, 2002);
 
         //Follow system which controls all follow operations
         FollowSystem Following = new FollowSystem();
@@ -138,6 +140,7 @@ public class UserPanel
 
                 //Shows user's Timeline
                 case 5:
+                    System.out.println("Time Line:");
                     timeLine.getTimeLine(user);
                     if(user.getPostList().size() == 0){
                         System.out.println("___________________");
@@ -176,12 +179,18 @@ public class UserPanel
                             //Prints all comments for selected post
                             case 3 :
                                 timeLine.getTimeLine(user, tPostNumber);
+                                if(user.getTimeLine().get(tPostNumber-1).getComments().size() == 0){
+                                    System.out.println("There is no comment to show. You can write the first comment.");
+                                    break;
+                                }
+                                else{
+                                System.out.println("Comments :\n__________________");
                                 for(int i=0;i<user.getTimeLine().get(tPostNumber-1).getComments().size();i++)
                                 {
                                     System.out.println(user.getTimeLine().get(tPostNumber - 1).getComments().get(i));
                                 }
                                 break;
-
+                                }
                             //Gets main page for user
                             case 4 :
                                 timeLine.getTimeLine(user);
@@ -192,6 +201,7 @@ public class UserPanel
 
                     //Shows user's main page
                 case 6:
+                    System.out.println("Main Page:");
                     mp.getMainPage(user);
                     if(user.getPostList().size() == 0){
                         System.out.println("___________________");
@@ -201,7 +211,7 @@ public class UserPanel
                     }
                     else
                         {
-                            System.out.println("Choose the post number for showing post operations");
+                            System.out.println("Choose the post number for show post operations");
 
                             int postNumber = scanner.nextInt();
                             scanner.nextLine();//dummy;
@@ -231,12 +241,18 @@ public class UserPanel
                                     //Prints all comments for selected post
                                 case 3 :
                                     mp.getMainPage(user, postNumber);
+                                    if(user.getPostList().get(postNumber-1).getComments().size() == 0){
+                                    System.out.println("There is no comment to show. You can write the first comment.");
+                                    break;
+                                }
+                                else{
+                                    System.out.println("Comments :\n__________________");
                                     for(int i=0;i<user.getPostList().get(postNumber-1).getComments().size();i++)
                                     {
                                         System.out.println(user.getPostList().get(postNumber - 1).getComments().get(i));
                                     }
                                     break;
-
+                                    }
                                     //Gets main page for user
                                 case 4 :
                                     mp.getMainPage(user);
