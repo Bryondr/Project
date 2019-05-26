@@ -14,6 +14,15 @@ public class Post {
     private String sharer;
 
 
+    public Post(String sharer,String content,int likes, int commentCount)
+    {
+        this.sharer = sharer;
+        this.content = content;
+        this.likes = likes;
+        this.commentCount = commentCount;
+        this.comments = new ArrayList<String>();
+    }
+
     public Post(String sharer,String content, int likes, int commentCount, ArrayList<String> comments)
     {
         this.sharer = sharer;
@@ -45,9 +54,57 @@ public class Post {
     public void setSharer(String sharer) { this.sharer = sharer;}
     //Other Methods
 
-    public void Like (){
-        likes = likes+1;
+    public void Like ()
+    {
+        if(this.likes<0){ this.likes = this.likes+1;}
+        if(this.likes>0){this.likes = this.likes-1;}
+
     }
+
+
+    public void sharePost(UserClass user,FollowSystem Following,String content)
+    {
+        this.sharer = user.getName();
+        setContent(content);
+        ArrayList<Post> list = new ArrayList<>();
+
+        //adds post to user's time line
+        list = user.getTimeLine();
+        list.add(this);
+        user.setTimeLine(list);
+
+        //adds post to user's post list(for main page)
+        list = user.getPostList();
+        list.add(this);
+        user.setPostList(list);
+
+
+        //sends post to followers postList
+        for (int i=1 ;i<user.getUserlist().size();i++)
+        {
+            //controls if user is followed
+            if (Following.IsFollow(user.getUserlist().get(i), user))
+            {
+
+                for (int j = 0;j < user.getPostList().size();j++)
+                {
+
+                    if (this.equals(user.getUserlist().get(i).getPostList().get(j)) )
+                    {
+                        boolean a = this.equals(user.getUserlist().get(i).getPostList().get(j));
+                        if(a) {break;}
+                    }
+
+                    list = user.getUserlist().get(i).getPostList();
+                    list.add(this);
+                    user.getUserlist().get(i).setPostList(list);
+                }
+            }
+
+        }
+    }
+
+
 
     public void sharePost(UserClass user,FollowSystem Following)
     {
