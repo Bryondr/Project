@@ -2,13 +2,17 @@ import java.util.ArrayList;
 
 public class FollowSystem
 {
+    private ArrayList<UserClass> RemainingUsers;
     //constuctor
     public FollowSystem()
     {
-
+        this.RemainingUsers = UserClass.getUserlist();
     }
 
+    public ArrayList<UserClass> getRemainingUsers() { return RemainingUsers; }
+    public void setRemainingUsers(ArrayList<UserClass> remainingUsers) { RemainingUsers = remainingUsers; }
 
+    //Follows a user which selected
     public void Follow(UserClass user1 /*follower*/,UserClass user2 /*followed*/)
     {
         ArrayList<UserClass> list;
@@ -16,14 +20,24 @@ public class FollowSystem
         list.add(user2);
         user1.setFollowedList(list);
 
+       list = getRemainingUsers();
+       list.remove(user2);
+       setRemainingUsers(list);
+
+
     }
-    
+
+    //Unfollows user which selected
     public void Unfollow(UserClass user1,UserClass user2)
     {
         ArrayList<UserClass> list;
         list = user1.getFollowedList();
         list.remove(user2);
         user1.setFollowedList(list);
+
+        list = getRemainingUsers();
+        list.add(user2);
+        setRemainingUsers(list);
     }
 
     //Controls if user follows another selected user
