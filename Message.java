@@ -29,7 +29,7 @@ public class Message
     public void setSenderPerson(String senderPerson) { this.senderPerson = senderPerson; }
 
 
-
+    //Other Methods
     //Sends message to needed boxes
     public void SendMessage(UserClass user1,UserClass user2,String message,String content)
     {
