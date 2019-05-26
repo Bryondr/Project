@@ -1,3 +1,5 @@
+package project;
+    
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -56,9 +58,7 @@ public class Post {
 
     public void Like ()
     {
-        if(this.likes<0){ this.likes = this.likes+1;}
-        if(this.likes>0){this.likes = this.likes-1;}
-
+     if(this.likes == 0){ this.likes = this.likes+1;}
     }
 
 
@@ -146,7 +146,7 @@ public class Post {
         System.out.println("Write your comment here: ");
         String comm = scanner.nextLine();
 
-        list.add(user.getName() + " : " + comm);
+        list.add(user.getName() + " --> " + comm);
         this.setComments(list);
 
         //it adds 1 to comment count
