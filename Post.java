@@ -1,5 +1,3 @@
-package project;
-    
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -58,7 +56,7 @@ public class Post {
 
     public void Like ()
     {
-     if(this.likes == 0){ this.likes = this.likes+1;}
+        if(this.likes == 0){ this.likes = this.likes+1;}
     }
 
 
@@ -80,27 +78,33 @@ public class Post {
 
 
         //sends post to followers postList
-        for (int i=1 ;i<user.getUserlist().size();i++)
+        for (int i=0 ;i<user.getUserlist().size();i++)
         {
             //controls if user is followed
             if (Following.IsFollow(user.getUserlist().get(i), user))
             {
+                list = user.getUserlist().get(i).getPostList();
+                list.add(this);
+                user.getUserlist().get(i).setPostList(list);
 
-                for (int j = 0;j < user.getPostList().size();j++)
+                //controls users post list
+                for (int j = 0;j < user.getUserlist().get(i).getPostList().size();j++)
                 {
-
+                    //continues when it finds first post
                     if (this.equals(user.getUserlist().get(i).getPostList().get(j)) )
                     {
-                        boolean a = this.equals(user.getUserlist().get(i).getPostList().get(j));
-                        if(a) {break;}
+                        continue;
                     }
-
-                    list = user.getUserlist().get(i).getPostList();
-                    list.add(this);
-                    user.getUserlist().get(i).setPostList(list);
+                    //removes if it finds second same post
+                    if (this.equals(user.getUserlist().get(i).getPostList().get(j)) )
+                    {
+                        list = user.getUserlist().get(i).getPostList();
+                        list.remove(this);
+                        user.getUserlist().get(i).setPostList(list);
+                        break;
+                    }
                 }
             }
-
         }
     }
 
@@ -137,10 +141,11 @@ public class Post {
             }
         }
         System.out.println("\n\tPosted.");
-        }
+    }
 
 
-    public void Comment(UserClass user) {
+    public void Comment(UserClass user)
+    {
         ArrayList<String> list = new ArrayList<String>();
         list = this.getComments();
         System.out.println("Write your comment here: ");
