@@ -1,5 +1,6 @@
-public class TimeLine {
+package project;
 
+public class TimeLine {
 
     //Gets all posts from user'stimeline
     public void getTimeLine( UserClass user ){
@@ -21,6 +22,7 @@ public class TimeLine {
         System.out.println( i + ". Post\n" + user.getTimeLine().get(i-1).getSharer()+"\n");
         System.out.println(user.getTimeLine().get(i-1).getContent());
         System.out.println(user.getTimeLine().get(i-1).getLikes() + "Likes ");
+        System.out.println(user.getTimeLine().get(i-1).getComments().size()+" Comments");
         System.out.println("__________________");
     }
 }
