@@ -16,12 +16,27 @@ public class UserClass
     private String place;
     private ArrayList<Message> incoming;
     private ArrayList<Message> outgoing;
+    private static ArrayList<UserClass> userlist = new ArrayList<>();
 
-
+    //Constructors
     public UserClass ()
     {
-
+        this.name = " ";
+        this.email = " ";
+        this.dayOfBirth = 0;
+        this.monthOfBirth = 0;
+        this.yearOfBirth = 0;
+        this.notificationBox = new ArrayList<>();
+        this.postList = new ArrayList<>();
+        this.timeLine = new ArrayList<>();
+        this.favPosts = new ArrayList<>();
+        this.followedList = new ArrayList<>();
+        this.place = " ";
+        this.incoming = new ArrayList<>();
+        this.outgoing = new ArrayList<>();
+        userlist.add(this);
     }
+    
     public UserClass(String name,String email,int dayOfBirth, int monthOfBirth,int yearOfBirth)
     {
         this.name = name;
@@ -29,6 +44,15 @@ public class UserClass
         this.dayOfBirth = dayOfBirth;
         this.monthOfBirth = monthOfBirth;
         this.yearOfBirth = yearOfBirth;
+        this.notificationBox = new ArrayList<>();
+        this.postList = new ArrayList<>();
+        this.timeLine = new ArrayList<>();
+        this.favPosts = new ArrayList<>();
+        this.followedList = new ArrayList<>();
+        this.place = " ";
+        this.incoming = new ArrayList<>();
+        this.outgoing = new ArrayList<>();
+        userlist.add(this);
     }
 
     public UserClass(String name, String email, int dayOfBirth,int monthOfBirth,int yearOfBirth, ArrayList<String> notificationBox, ArrayList<Post> postList, ArrayList<Post> timeLine, ArrayList<Post> favPosts, ArrayList<UserClass> followedList, String place, ArrayList<Message> incoming, ArrayList<Message> outgoing)
@@ -46,6 +70,7 @@ public class UserClass
         this.place = place;
         this.incoming = incoming;
         this.outgoing = outgoing;
+        userlist.add(this);
     }
 
     // Getters and Setters
@@ -73,10 +98,10 @@ public class UserClass
     public String getPlace() { return place; }
     public void setPlace(String place) { this.place = place; }
 
-    public ArrayList getIncoming() { return incoming; }
+    public ArrayList<Message> getIncoming() { return incoming; }
     public void setIncoming(ArrayList<Message> incoming) { this.incoming = incoming; }
 
-    public ArrayList getOutgoing() { return outgoing; }
+    public ArrayList<Message> getOutgoing() { return outgoing; }
     public void setOutgoing(ArrayList<Message> outgoing) { this.outgoing = outgoing; }
 
     public int getDayOfBirth() {return dayOfBirth; }
@@ -87,6 +112,9 @@ public class UserClass
 
     public int getYearOfBirth() {return yearOfBirth; }
     public void setYearOfBirth(int yearOfBirth) { this.yearOfBirth = yearOfBirth; }
+
+    public static ArrayList<UserClass> getUserlist() { return userlist; }
+    public static void setUserlist(ArrayList<UserClass> userlist) { UserClass.userlist = userlist; }
 
     //Other methods
 
@@ -101,7 +129,7 @@ public class UserClass
 
     public void ShowNotifications()
     {
-        for (int i = 0; i < notificationBox.size(); i++)
+        for (int i = 0; i < notificationBox.size()-1; i++)
         {
             System.out.println(notificationBox.get(i));
         }
