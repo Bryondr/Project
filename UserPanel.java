@@ -225,6 +225,7 @@ public class UserPanel
                                 PostList = user.getFavPosts();
                                 PostList.add(user.getTimeLine().get(tPostNumber-1));
                                 user.setFavPosts(PostList);
+                                break;
                                 //Gets main page for user
                             case 5 :
                                 timeLine.getTimeLine(user);
@@ -295,6 +296,7 @@ public class UserPanel
                                 PostList = user.getFavPosts();
                                 PostList.add(user.getTimeLine().get(postNumber-1));
                                 user.setFavPosts(PostList);
+                                break;
                             case 5 :
                                 mp.getMainPage(user);
                                 break;
@@ -361,7 +363,7 @@ public class UserPanel
                     {
                         System.out.println(user.getFavPosts().get(i));
                     }
-                    
+
                 case 11:
                     if( user.getNotificationBox().size() == 0)
                     {
@@ -373,7 +375,7 @@ public class UserPanel
                     System.out.println("Enter anything to return User Panel.");
                     scanner.nextLine();
                     break;
-                    
+
                 default:
                     exit =1;
             }
