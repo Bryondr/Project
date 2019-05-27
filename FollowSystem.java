@@ -9,13 +9,15 @@ public class FollowSystem
         this.RemainingUsers = UserClass.getUserlist();
     }
 
+    //Getters and Setters
     public ArrayList<UserClass> getRemainingUsers() { return RemainingUsers; }
     public void setRemainingUsers(ArrayList<UserClass> remainingUsers) { RemainingUsers = remainingUsers; }
+
 
     //Follows a user which selected
     public void Follow(UserClass user1 /*follower*/,UserClass user2 /*followed*/)
     {
-        ArrayList<UserClass> list;
+        ArrayList<UserClass> list = new ArrayList<>();
         list = user1.getFollowedList();
         list.add(user2);
         user1.setFollowedList(list);
@@ -23,6 +25,10 @@ public class FollowSystem
        list = getRemainingUsers();
        list.remove(user2);
        setRemainingUsers(list);
+
+       ArrayList<String>list1 = new ArrayList<>();
+       list1 = user2.getNotificationBox();
+       list1.add("You followed by "+ user1.getName());
 
 
     }
@@ -38,6 +44,10 @@ public class FollowSystem
         list = getRemainingUsers();
         list.add(user2);
         setRemainingUsers(list);
+
+        ArrayList<String>list1 = new ArrayList<>();
+        list1 = user2.getNotificationBox();
+        list1.add("You unfollowed by "+ user1.getName());
     }
 
     //Controls if user follows another selected user
@@ -75,3 +85,4 @@ public class FollowSystem
 
     }
 }
+
