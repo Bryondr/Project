@@ -60,6 +60,10 @@ public class UserPanel
         list.add(user);
         user3.setFollowedList(list);
 
+
+
+
+
         //Creates others posts
         Post otherpost1 = new Post(user1.getName()," ",0,0);
         Post otherpost2 = new Post(user1.getName()," ",0,0);
@@ -68,32 +72,38 @@ public class UserPanel
         Post otherpost5 = new Post(user1.getName()," ",0,0);
         Post otherpost6 = new Post(user1.getName()," ",0,0);
         Post otherpost7 = new Post(user1.getName()," ",0,0);
+        Message message1 = new Message();
+        Message message2 = new Message();
 
-        int exit =0;
+        int exit = 0;
         //Panel
         while (exit == 0) {
             System.out.println("\nWelcome " + user.getName() + ", please choose an operation;");
-            System.out.println("1. Show Inbox");
-            System.out.println("2. Show Outbox");
-            System.out.println("3. Send Message");
-            System.out.println("4. Share Post");
-            System.out.println("5. Show Time Line");
-            System.out.println("6. Show Main Page");
-            System.out.println("7. Show Your Followings");
-            System.out.println("8. Show Your Followers");
-            System.out.println("9. Follow People");
-            System.out.println("10. Show Favourite Posts");
-            System.out.println("11. Show Notifications");
+            System.out.println("1.  Show Inbox");
+            System.out.println("2.  Show Outbox");
+            System.out.println("3.  Send Message");
+            System.out.println("4.  Share Post");
+            System.out.println("5.  Show Time Line");
+            System.out.println("6.  Show Main Page");
+            System.out.println("7.  Show Your Followings");
+            System.out.println("8.  Show Your Followers");
+            System.out.println("9.  Follow People");
+            System.out.println("10. Unfollow People");
+            System.out.println("11. Show Favourite Posts");
+            System.out.println("12. Show Notifications");
 
+            //sends message from another user to our user
+            message1.SendMessage(user1,user,"Hi","content");
+            message2.SendMessage(user2,user,"Hi","content");
 
             //shares others posts and controls when someone follows they can see the posts in their main page
-            otherpost1.sharePost(user1,Following,"I'm new here");
-            otherpost2.sharePost(user2,Following,"I'm new here");
-            otherpost3.sharePost(user3,Following,"I'm new here");
-            otherpost4.sharePost(user4,Following,"I'm new here");
-            otherpost5.sharePost(user5,Following,"I'm new here");
-            otherpost6.sharePost(user6,Following,"I'm new here");
-            otherpost7.sharePost(user7,Following,"I'm new here");
+            otherpost1.sharePost(user1,Following,"I created this platform.");
+            otherpost2.sharePost(user2,Following,"I created this platform.");
+            otherpost3.sharePost(user3,Following,"Hi,I'm new here.");
+            otherpost4.sharePost(user4,Following,"Hello,I'm new here.");
+            otherpost5.sharePost(user5,Following,"Hi,Im new here.");
+            otherpost6.sharePost(user6,Following,"Hello,I'm new here.");
+            otherpost7.sharePost(user7,Following,"Hi,I'm new here.");
 
 
 
@@ -115,7 +125,7 @@ public class UserPanel
                         System.out.println("_______________\nInbox:");
                         for(int i =0;i < user.getIncoming().size();i++){
                             System.out.println("____________");
-                            System.out.println("From :"+user.getOutgoing().get(i).getSenderPerson());
+                            System.out.println("From :"+user.getIncoming().get(i).getSenderPerson());
                             System.out.println("\nMessage: \n"+user.getIncoming().get(i).getMessage());
                             System.out.println("Content : \n"+user.getIncoming().get(i).getContent());
                             System.out.println("____________");
@@ -153,9 +163,12 @@ public class UserPanel
                         break;
                     }
 
+                    else
+                        {
                     Message message = new Message();
                     System.out.println("\n");
                     message.MessagingPanel(user);
+                    }
                     break;
 
                 //Creates new post for user and sends him creation page
@@ -346,7 +359,7 @@ public class UserPanel
                         System.out.println(i + " " + Following.getRemainingUsers().get(i).getName());
                     }
 
-                    System.out.println("Please choose the user which you want follow");
+                    System.out.println("Please choose the user who you want to follow");
                     int select = scanner.nextInt();
                     scanner.nextLine();
 
@@ -357,8 +370,29 @@ public class UserPanel
                     System.out.println("___________________");
                     break;
 
+                case 10:
+                    System.out.println("All users who you are following\n");
+
+                    for(int i = 0; i < user.getFollowedList().size(); i++)
+                    {
+                        System.out.println(i+1 +" "+ user.getFollowedList().get(i).getName());
+                    }
+
+                    System.out.println("Please choose the user who you want to unfollow");
+                    int select1 = scanner.nextInt();
+                    scanner.nextLine();
+
+                    //Holds name
+                    String name = user.getFollowedList().get(select1-1).getName();
+
+                    //makes you unfollow user who you choose
+                    Following.Unfollow(user, user.getFollowedList().get(select1-1));
+                    System.out.println("You unfollowed " +  name);
+                    System.out.println("___________________");
+                    break;
+
                 // Shows user's notification box
-                case 10 :
+                case 11 :
                     if(user.getFavPosts().size()==0)
                     {
                         System.out.println("You have not any fav posts, go and fav some post.");
@@ -390,7 +424,7 @@ public class UserPanel
                         break;
                     }
 
-                case 11:
+                case 12:
                     if( user.getNotificationBox().size() == 0)
                     {
                         System.out.println("You have 0 Notifications.");
