@@ -29,13 +29,14 @@ public class UserPanel
         UserClass user = Registerer.Registering();
 
         //Creates other users for our program(özellikleri değişecek)
-        UserClass user1 = new UserClass("Deyan Bora Çetin", "deyan_bora@hotmail.com", 23, 01, 1999);
-        UserClass user2 = new UserClass("Ege Bulut", "izciege@hotmail.com", 3, 4, 2000);
-        UserClass user3 = new UserClass("Mehmet Uslu", "mehmetamca@gmail.com", 6, 7, 1967);
-        UserClass user4 = new UserClass("Ahmet Sel", "ahmetSel@hotmail.com", 31, 5, 1985);
-        UserClass user5 = new UserClass("Arzu Hepcan", "arzu_1997@hotmail.com", 1, 4, 1997);
-        UserClass user6 = new UserClass("Aslı Bekir", "asli_20062013@hotmail.com", 25, 1, 1983);
-        UserClass user7 = new UserClass("Dilan Saman", "dilan_saman@gmail.com", 20, 6, 2002);
+        UserClass user1 = new UserClass("Deyan Bora Çetin", "deyan_bora@hotmail.com", 23, 01, 1999,"İzmir");
+        UserClass user2 = new UserClass("Ege Bulut", "izciege@hotmail.com", 3, 4, 2000,"Datça");
+        UserClass user3 = new UserClass("Mehmet Uslu", "mehmetamca@gmail.com", 6, 7, 1967,"Erzurum");
+        UserClass user4 = new UserClass("Ahmet Sel", "ahmetSel@hotmail.com", 31, 5, 1985,"Manisa");
+        UserClass user5 = new UserClass("Arzu Hepcan", "arzu_1997@hotmail.com", 1, 4, 1997,"Ankara");
+        UserClass user6 = new UserClass("Aslı Bekir", "asli_20062013@hotmail.com", 25, 1, 1983,"Adana");
+        UserClass user7 = new UserClass("Dilan Saman", "dilan_saman@gmail.com", 20, 6, 2002,"Uşak");
+
 
         //Follow system which controls all follow operations
         FollowSystem Following = new FollowSystem();
