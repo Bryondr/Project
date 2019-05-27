@@ -62,6 +62,8 @@ public class Register
             user.setYearOfBirth(yearOfBirth);
             scanner.nextLine();//Dummy
         }
+        
+        //ADAMDAN KALDIĞI YERİ FALAN İSTEYECEKTİK LAA
         return user;
     }
 }
