@@ -1,11 +1,9 @@
-package project;
-
 public class TimeLine {
 
     //Gets all posts from user'stimeline
     public void getTimeLine( UserClass user ){
 
-        for(int i=0; i<user.getPostList().size(); i++)
+        for(int i=0; i<user.getTimeLine().size(); i++)
         {
             System.out.println("__________________");
             System.out.println( i+1 + ". Post\n" + user.getTimeLine().get(i).getSharer()+"\n");
