@@ -168,7 +168,7 @@ public class UserPanel
                 case 5:
                     System.out.println("Time Line:");
                     timeLine.getTimeLine(user);
-                    if(user.getPostList().size() == 0)
+                    if(user.getTimeLine().size() == 0)
                     {
                         System.out.println("___________________");
                         System.out.println("Your Time Line is empty, please post or share something.");
@@ -294,7 +294,7 @@ public class UserPanel
                                 //Gets main page for user
                             case 4:
                                 PostList = user.getFavPosts();
-                                PostList.add(user.getTimeLine().get(postNumber-1));
+                                PostList.add(user.getPostList().get(postNumber-1));
                                 user.setFavPosts(PostList);
                                 break;
                             case 5 :
@@ -359,9 +359,35 @@ public class UserPanel
 
                 // Shows user's notification box
                 case 10 :
-                    for(int i = 0; i < user.getFavPosts().size(); i++)
+                    if(user.getFavPosts().size()==0)
                     {
-                        System.out.println(user.getFavPosts().get(i));
+                        System.out.println("You have not any fav posts, go and fav some post.");
+                        break;
+                    }
+                    else
+                        {
+                        for(int i = 0; i < user.getFavPosts().size(); i++){
+                            System.out.println("___________________");
+                            System.out.println(user.getFavPosts().get(i).getSharer()+"\n");
+                            System.out.println(user.getFavPosts().get(i).getContent());
+                            System.out.println(user.getFavPosts().get(i).getLikes() + " Likes");
+                            System.out.println(user.getFavPosts().get(i).getComments().size()+" Comments");
+
+                            if(user.getFavPosts().get(i).getComments().size() == 0)
+                            {
+                                System.out.println("There is no comment to show.");
+                                break;
+                            }
+                            else
+                                {
+                                System.out.println("Comments :\n___________________");
+                                for(int x=0; x<user.getFavPosts().get(i).getComments().size(); x++){
+                                    System.out.println(user.getFavPosts().get(i).getComments().get(x));
+                                }
+                            }
+                            System.out.println("__");
+                        }
+                        break;
                     }
 
                 case 11:
