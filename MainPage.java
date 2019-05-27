@@ -1,11 +1,9 @@
-package project;
-
 public class MainPage {
 
-    //Gets all posts from mainpage
+    //Gets all posts from main page
     public void getMainPage( UserClass user ){
 
-        for(int i=0; i<user.getPostList().size(); i++) 
+        for(int i=0; i<user.getPostList().size(); i++)
         {
             System.out.println("__________________");
             System.out.println( i+1 + ". Post\n" + user.getPostList().get(i).getSharer()+"\n");
@@ -15,7 +13,7 @@ public class MainPage {
             System.out.println("__________________");
         }
     }
-    //Gets post from mainpage
+    //Gets post from main page
     public void getMainPage( UserClass user, int i )
     {
         System.out.println("__________________");
