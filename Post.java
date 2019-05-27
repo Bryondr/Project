@@ -87,16 +87,18 @@ public class Post {
                 list.add(this);
                 user.getUserlist().get(i).setPostList(list);
 
-                //controls users post list
+                int controller =0;
+
+                //controls users post list for not repeatly sending same post into his post list
                 for (int j = 0;j < user.getUserlist().get(i).getPostList().size();j++)
                 {
-                    //continues when it finds first post
+                    //adds 1 for this posts counter
                     if (this.equals(user.getUserlist().get(i).getPostList().get(j)) )
                     {
-                        continue;
+                        controller++;
                     }
                     //removes if it finds second same post
-                    if (this.equals(user.getUserlist().get(i).getPostList().get(j)) )
+                    if (controller==2)
                     {
                         list = user.getUserlist().get(i).getPostList();
                         list.remove(this);
