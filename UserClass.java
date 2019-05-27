@@ -36,7 +36,7 @@ public class UserClass
         this.outgoing = new ArrayList<>();
         userlist.add(this);
     }
-    
+
     public UserClass(String name,String email,int dayOfBirth, int monthOfBirth,int yearOfBirth)
     {
         this.name = name;
@@ -81,7 +81,7 @@ public class UserClass
     public void setEmail(String email) { this.email = email; }
 
     public ArrayList<String> getNotificationBox() { return notificationBox; }
-    public void setNotificationBox(ArrayList notificationBox) { this.notificationBox = notificationBox; }
+    public void setNotificationBox(ArrayList<String> notificationBox) { this.notificationBox = notificationBox; }
 
     public ArrayList<Post> getPostList() { return postList; }
     public void setPostList(ArrayList<Post> postList) { this.postList = postList; }
@@ -89,7 +89,7 @@ public class UserClass
     public ArrayList<Post> getTimeLine() { return timeLine; }
     public void setTimeLine(ArrayList<Post> timeLine) { this.timeLine = timeLine; }
 
-    public ArrayList getFavPosts() { return favPosts; }
+    public ArrayList<Post> getFavPosts() { return favPosts; }
     public void setFavPosts(ArrayList<Post> favPosts) { this.favPosts = favPosts; }
 
     public ArrayList<UserClass> getFollowedList() { return followedList; }
@@ -129,10 +129,10 @@ public class UserClass
 
     public void ShowNotifications()
     {
-        for (int i = 0; i < notificationBox.size()-1; i++)
+        for (int i = 0; i < notificationBox.size(); i++)
         {
             System.out.println(notificationBox.get(i));
         }
     }
-
 }
+
