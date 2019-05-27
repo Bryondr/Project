@@ -6,9 +6,10 @@ public class Register
     {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("\t\t\t***Our Java Project***\n\t-Bora -Ege\n");
+        System.out.println("\t\t\t***Our Java Project***\n\t-Deyan Bora Çetin -Ege Bulut\n");
         System.out.println("Please fill the blanks with valid answers.");
 
+        //creates new user object
         UserClass user = new UserClass();
 
         System.out.println("User Name\t:");
@@ -62,8 +63,13 @@ public class Register
             user.setYearOfBirth(yearOfBirth);
             scanner.nextLine();//Dummy
         }
-        
-        //ADAMDAN KALDIĞI YERİ FALAN İSTEYECEKTİK LAA
+
+        //Getting place of residence info
+        System.out.println("Please enter your place of residence:");
+        String place = scanner.nextLine();
+        user.setPlace(place);
+
+        //returns UserClass object for our user
         return user;
     }
 }
