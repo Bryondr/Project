@@ -37,7 +37,7 @@ public class UserClass
         userlist.add(this);
     }
 
-    public UserClass(String name,String email,int dayOfBirth, int monthOfBirth,int yearOfBirth)
+    public UserClass(String name,String email,int dayOfBirth, int monthOfBirth,int yearOfBirth,String place)
     {
         this.name = name;
         this.email = email;
@@ -49,7 +49,7 @@ public class UserClass
         this.timeLine = new ArrayList<>();
         this.favPosts = new ArrayList<>();
         this.followedList = new ArrayList<>();
-        this.place = " ";
+        this.place = place;
         this.incoming = new ArrayList<>();
         this.outgoing = new ArrayList<>();
         userlist.add(this);
@@ -135,4 +135,3 @@ public class UserClass
         }
     }
 }
-
