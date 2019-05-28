@@ -37,6 +37,7 @@ public class Message {
     public String getSenderPerson() { return senderPerson; }
     public void setSenderPerson(String senderPerson) { this.senderPerson = senderPerson; }
 
+
     //Other Methods
     //Sends message to needed boxes
     public void SendMessage(UserClass user1, UserClass user2, String message, String content)
@@ -63,7 +64,7 @@ public class Message {
             list = user2.getIncoming();
             list.add(this);
             user2.setIncoming(list);
-            user2.SendToNotificationBox("You got a new message from " + user1.getName() + "\nMessage is: " + getMessage() + "\nContent is: " + getContent());
+            user2.SendToNotificationBox("You got a new message from " + user1.getName());
 
             int controller = 0;
             //controls users inbox
