@@ -1,4 +1,5 @@
-public class TimeLine {
+public class TimeLine 
+{
 
     //Gets all posts from user'stimeline
     public void getTimeLine( UserClass user ){
