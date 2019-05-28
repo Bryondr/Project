@@ -12,6 +12,7 @@ public class Post {
     private int likes;
     private int commentCount;
     private String sharer;
+    private ArrayList<UserClass> likers ;
 
 
     public Post(String sharer,String content,int likes, int commentCount)
@@ -21,6 +22,7 @@ public class Post {
         this.likes = likes;
         this.commentCount = commentCount;
         this.comments = new ArrayList<String>();
+        this.likers = new ArrayList<UserClass>();
     }
 
     public Post(String sharer,String content, int likes, int commentCount, ArrayList<String> comments)
@@ -30,10 +32,12 @@ public class Post {
         this.likes = likes;
         this.commentCount = commentCount;
         this.comments = comments;
+        this.likers = new ArrayList<UserClass>();
     }
     public Post ()
     {
         this.comments = new ArrayList<String>();
+        this.likers = new ArrayList<UserClass>();
     }
 
     //Getters and Setters
@@ -52,11 +56,18 @@ public class Post {
 
     public String getSharer() { return sharer; }
     public void setSharer(String sharer) { this.sharer = sharer;}
+
+    public ArrayList<UserClass> getLikers() { return likers; }
+    public void setLikers(ArrayList<UserClass> likers) { this.likers = likers; }
+
     //Other Methods
 
     public void Like ()
     {
-        if(this.likes == 0){ this.likes = this.likes+1;}
+        if(this.likes == 0)
+        {
+            this.likes = this.likes+1;
+        }
     }
 
 
@@ -103,9 +114,26 @@ public class Post {
                         list = user.getUserlist().get(i).getPostList();
                         list.remove(this);
                         user.getUserlist().get(i).setPostList(list);
+
                         break;
                     }
                 }
+            }
+        }
+
+        //controls time line for if theres second same post
+        int controller = 0;
+        for(int i =0;i<user.getTimeLine().size();i++)
+        {
+            if (this.equals(user.getTimeLine().get(i)))
+            {
+                controller++;
+            }
+            if (controller == 2 )
+            {
+                list = user.getTimeLine();
+                list.remove(this);
+                user.setTimeLine(list);
             }
         }
     }
@@ -134,15 +162,34 @@ public class Post {
         //sends post to followers postList
         for (int i=0 ;i<user.getUserlist().size();i++)
         {
-            if (Following.IsFollow(user.getUserlist().get(i),user ))
+            //controls if user is followed
+            if (Following.IsFollow(user.getUserlist().get(i), user))
             {
                 list = user.getUserlist().get(i).getPostList();
                 list.add(this);
                 user.getUserlist().get(i).setPostList(list);
-                //Control Post
+
+                int controller =0;
+
+                //controls users post list for not repeatly sending same post into his post list
+                for (int j = 0;j < user.getUserlist().get(i).getPostList().size();j++)
+                {
+                    //adds 1 for this posts counter
+                    if (this.equals(user.getUserlist().get(i).getPostList().get(j)) )
+                    {
+                        controller++;
+                    }
+                    //removes if it finds second same post
+                    if (controller==2)
+                    {
+                        list = user.getUserlist().get(i).getPostList();
+                        list.remove(this);
+                        user.getUserlist().get(i).setPostList(list);
+                        break;
+                    }
+                }
             }
         }
-        System.out.println("\n\tPosted.");
     }
 
 
