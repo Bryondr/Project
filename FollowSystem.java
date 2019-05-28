@@ -2,11 +2,13 @@ import java.util.ArrayList;
 
 public class FollowSystem
 {
+
     private ArrayList<UserClass> RemainingUsers;
     //constuctor
     public FollowSystem()
     {
-        this.RemainingUsers = UserClass.getUserlist();
+        //gets shallow copy of all users list
+        this.RemainingUsers = new ArrayList<UserClass>(UserClass.getUserlist());
     }
 
     //Getters and Setters
@@ -79,10 +81,6 @@ public class FollowSystem
                 }
             }
         }
-
         return false;//if it doesnt return true from top it returns false
-
-
     }
 }
-
