@@ -13,7 +13,7 @@ public class MainPage {
             System.out.println("__________________");
         }
     }
-    //Gets post from main page
+    //Gets selected post from main page
     public void getMainPage( UserClass user, int i )
     {
         System.out.println("__________________");
