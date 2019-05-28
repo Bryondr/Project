@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class UserPanel{
-    
+
     public static void main(String args[]){
 
         //controls all main page for any user
@@ -108,18 +108,22 @@ public class UserPanel{
             int choose = scanner.nextInt();
             scanner.nextLine();//dummy;
 
-            switch (choose){
+            switch (choose)
+            {
                 //Shows inbox for our user
                 case 1:
-                    if(user.getIncoming().size() == 0){
+                    if(user.getIncoming().size() == 0)
+                    {
                         System.out.println("____________");
                         System.out.println("Your inbox is empty.");
                         System.out.println("____________");
                         break;
                     }
-                    else{
+                    else
+                        {
                         System.out.println("_______________\nInbox:");
-                        for(int i =0;i < user.getIncoming().size();i++){
+                        for(int i =0;i < user.getIncoming().size();i++)
+                        {
                             System.out.println("____________");
                             System.out.println("From :"+user.getIncoming().get(i).getSenderPerson());
                             System.out.println("\nMessage: \n"+user.getIncoming().get(i).getMessage());
@@ -130,13 +134,15 @@ public class UserPanel{
                     }
                     //Shows outbox for our user
                 case 2:
-                    if(user.getOutgoing().size() == 0){
+                    if(user.getOutgoing().size() == 0)
+                    {
                         System.out.println("____________");
                         System.out.println("Your Outbox is empty. Please try to message someone.");
                         System.out.println("____________");
                         break;
                     }
-                    else{
+                    else
+                        {
                         System.out.println("_______________\nOutbox:");
                         for(int i =0;i < user.getOutgoing().size();i++){
                             System.out.println("_______________");
@@ -149,17 +155,19 @@ public class UserPanel{
                     }
                     //Sends user to message panel for sending message
                 case 3:
-                    if (user.getFollowedList().size()==0){
+                    if (user.getFollowedList().size()==0)
+                    {
                         System.out.println("___________________");
                         System.out.println("You haven't followed anyone yet please follow someone.");
                         System.out.println("___________________");
                         break;
                     }
 
-                    else{
-                    Message message = new Message();
-                    System.out.println("\n");
-                    message.MessagingPanel(user);
+                    else
+                        {
+                        Message message = new Message();
+                        System.out.println("\n");
+                        message.MessagingPanel(user);
                     }
                     break;
 
@@ -174,14 +182,16 @@ public class UserPanel{
                 case 5:
                     System.out.println("Time Line:");
                     timeLine.getTimeLine(user);
-                    if(user.getTimeLine().size() == 0){
+                    if(user.getTimeLine().size() == 0)
+                    {
                         System.out.println("___________________");
                         System.out.println("Your Time Line is empty, please post or share something.");
                         System.out.println("___________________");
                         break;
                     }
 
-                    else{
+                    else
+                        {
                         System.out.println("Choose the post number for showing post operations");
 
                         int tPostNumber = scanner.nextInt();
@@ -203,6 +213,17 @@ public class UserPanel{
                             //Adds 1 like for post which our user selects
                             case 1 :
                                 user.getTimeLine().get(tPostNumber-1).Like();
+                                for (int i = 0 ; i < user.getTimeLine().get(tPostNumber-1).getLikers().size(); i++)
+                                {
+                                    //Controls if user likes it 2 times it doesn't add him 2 times
+                                    if (user.equals(user.getTimeLine().get(tPostNumber-1).getLikers().get(i)))
+                                    {
+                                        list = user.getTimeLine().get(tPostNumber-1).getLikers();
+                                        list.remove(user);
+                                        user.getTimeLine().get(tPostNumber-1).setLikers(list);
+                                    }
+                                }
+
                                 list = user.getTimeLine().get(tPostNumber-1).getLikers();
                                 list.add(user);
                                 user.getTimeLine().get(tPostNumber-1).setLikers(list);
@@ -216,24 +237,30 @@ public class UserPanel{
                             //Prints all comments for selected post
                             case 3 :
                                 timeLine.getTimeLine(user, tPostNumber);
-                                if(user.getTimeLine().get(tPostNumber-1).getComments().size() == 0){
+                                if(user.getTimeLine().get(tPostNumber-1).getComments().size() == 0)
+                                {
                                     System.out.println("There is no comment to show. You can write the first comment.");
                                     break;
                                 }
-                                else{
+                                else
+                                    {
                                     System.out.println("Comments :\n__________________");
-                                    for(int i=0;i<user.getTimeLine().get(tPostNumber-1).getComments().size();i++){
+                                    for(int i=0;i<user.getTimeLine().get(tPostNumber-1).getComments().size();i++)
+                                    {
                                         System.out.println(user.getTimeLine().get(tPostNumber - 1).getComments().get(i));
                                     }
                                     break;
                                 }
                             case 4:
-                                if(user.getPostList().get(tPostNumber-1).getLikers().size()== 0){
+                                if(user.getPostList().get(tPostNumber-1).getLikers().size()== 0)
+                                {
                                     System.out.println("No likes");
                                     break;
                                 }
-                                else{
-                                    for (int i = 0 ; i<user.getPostList().get(tPostNumber-1).getLikers().size();i++){
+                                else
+                                    {
+                                    for (int i = 0 ; i<user.getPostList().get(tPostNumber-1).getLikers().size();i++)
+                                    {
                                         System.out.println(user.getPostList().get(tPostNumber-1).getLikers().get(i).getName());
                                     }
                                     break;
@@ -243,7 +270,7 @@ public class UserPanel{
                                 PostList.add(user.getTimeLine().get(tPostNumber-1));
                                 user.setFavPosts(PostList);
                                 break;
-                                //Gets main page for user
+                            //Gets main page for user
                             case 6 :
                                 timeLine.getTimeLine(user);
                                 break;
@@ -256,7 +283,8 @@ public class UserPanel{
                     System.out.println("Please select whose timeline do you want to see:");
 
                     //prints names of users
-                    for(int i =1; i< userlist.size();i++){
+                    for(int i =1; i< userlist.size();i++)
+                    {
                         System.out.println(i + "." +userlist.get(i).getName());
                     }
 
@@ -267,13 +295,15 @@ public class UserPanel{
 
                     //prints selected users timeline
                     //controls if he has post in his timeline
-                    if(userlist.get(selectU).getTimeLine().size() == 0){
+                    if(userlist.get(selectU).getTimeLine().size() == 0)
+                    {
                         System.out.println("___________________");
                         System.out.println("His/Her Time Line is empty.");
                         System.out.println("___________________");
                         break;
                     }
-                    else{
+                    else
+                        {
 
                         System.out.println("Choose the post number for showing post operations");
 
@@ -290,14 +320,26 @@ public class UserPanel{
                         int tPostAction = scanner.nextInt();
                         scanner.nextLine();//dummy;
 
-                        switch (tPostAction){
+                        switch (tPostAction)
+                        {
                             //Adds 1 like for post which our user selects
                             case 1 :
                                 userlist.get(selectU).getTimeLine().get(tPostNumber-1).Like();
+
+                                for (int i = 0 ; i < userlist.get(selectU).getTimeLine().get(tPostNumber-1).getLikers().size(); i++)
+                                {
+                                    //Controls if user likes it 2 times it doesn't add him 2 times
+                                    if (user.equals(userlist.get(selectU).getTimeLine().get(tPostNumber-1).getLikers().get(i)))
+                                    {
+                                        list = userlist.get(selectU).getTimeLine().get(tPostNumber-1).getLikers();
+                                        list.remove(user);
+                                        userlist.get(selectU).getTimeLine().get(tPostNumber-1).setLikers(list);
+                                    }
+                                }
+
                                 list = userlist.get(selectU).getTimeLine().get(tPostNumber-1).getLikers();
                                 list.add(user);
                                 userlist.get(selectU).getTimeLine().get(tPostNumber-1).setLikers(list);
-                                
                                 break;
 
                             //Opens comment page for user
@@ -308,24 +350,30 @@ public class UserPanel{
                             //Prints all comments for selected post
                             case 3 :
                                 timeLine.getTimeLine(userlist.get(selectU), tPostNumber);
-                                if(userlist.get(selectU).getTimeLine().get(tPostNumber-1).getComments().size() == 0){
+                                if(userlist.get(selectU).getTimeLine().get(tPostNumber-1).getComments().size() == 0)
+                                {
                                     System.out.println("There is no comment to show. You can write the first comment.");
                                     break;
                                 }
-                                else{
-                                        System.out.println("Comments :\n__________________");
-                                        for(int i=0;i<userlist.get(selectU).getTimeLine().get(tPostNumber-1).getComments().size();i++){
-                                            System.out.println(userlist.get(selectU).getTimeLine().get(tPostNumber - 1).getComments().get(i));
-                                        }
-                                        break;
+                                else
+                                    {
+                                    System.out.println("Comments :\n__________________");
+                                    for(int i=0;i<userlist.get(selectU).getTimeLine().get(tPostNumber-1).getComments().size();i++)
+                                    {
+                                        System.out.println(userlist.get(selectU).getTimeLine().get(tPostNumber - 1).getComments().get(i));
                                     }
+                                    break;
+                                }
                             case 4:
-                                if(userlist.get(selectU).getPostList().get(tPostNumber-1).getLikers().size()== 0){
+                                if(userlist.get(selectU).getPostList().get(tPostNumber-1).getLikers().size()== 0)
+                                {
                                     System.out.println("No likes");
                                     break;
                                 }
-                                else{
-                                    for (int i = 0 ; i<userlist.get(selectU).getPostList().get(tPostNumber-1).getLikers().size();i++){
+                                else
+                                    {
+                                    for (int i = 0 ; i<userlist.get(selectU).getPostList().get(tPostNumber-1).getLikers().size();i++)
+                                    {
                                         System.out.println(userlist.get(selectU).getPostList().get(tPostNumber-1).getLikers().get(i).getName());
                                     }
                                     break;
@@ -344,15 +392,17 @@ public class UserPanel{
                 case 7:
                     System.out.println("Main Page:");
                     mp.getMainPage(user);
-                    
-                    if(user.getPostList().size() == 0){
+
+                    if(user.getPostList().size() == 0)
+                    {
                         System.out.println("___________________");
                         System.out.println("Your Main Page is empty, please follow someone or post something.");
                         System.out.println("___________________");
                         break;
                     }
-                    
-                    else{
+
+                    else
+                        {
                         System.out.println("Choose the post number for show post operations");
 
                         int postNumber = scanner.nextInt();
@@ -369,10 +419,23 @@ public class UserPanel{
                         int postAction = scanner.nextInt();
                         scanner.nextLine();//dummy;
 
-                        switch (postAction){
+                        switch (postAction)
+                        {
                             //Adds 1 like for post which our user selects
                             case 1 :
                                 user.getPostList().get(postNumber-1).Like();
+
+                                for (int i = 0 ; i < user.getPostList().get(postNumber-1).getLikers().size(); i++)
+                                {
+                                    //Controls if user likes it 2 times it doesn't add him 2 times
+                                    if (user.equals(user.getPostList().get(postNumber-1).getLikers().get(i)))
+                                    {
+                                        list = user.getPostList().get(postNumber-1).getLikers();
+                                        list.remove(user);
+                                        user.getPostList().get(postNumber-1).setLikers(list);
+                                    }
+                                }
+                                
                                 list = user.getPostList().get(postNumber-1).getLikers();
                                 list.add(user);
                                 user.getPostList().get(postNumber-1).setLikers(list);
@@ -385,30 +448,35 @@ public class UserPanel{
                             //Prints all comments for selected post
                             case 3 :
                                 mp.getMainPage(user, postNumber);
-                                if(user.getPostList().get(postNumber-1).getComments().size() == 0){
+                                if(user.getPostList().get(postNumber-1).getComments().size() == 0)
+                                {
                                     System.out.println("There is no comment to show. You can write the first comment.");
                                     break;
                                 }
-                                else{
+                                else
+                                    {
                                     System.out.println("Comments :\n__________________");
-                                    for(int i=0;i<user.getPostList().get(postNumber-1).getComments().size();i++){
+                                    for(int i=0;i<user.getPostList().get(postNumber-1).getComments().size();i++)
+                                    {
                                         System.out.println(user.getPostList().get(postNumber - 1).getComments().get(i));
                                     }
                                     break;
                                 }
-                            //show likers
+                                //show likers
                             case 4:
-                                if(user.getPostList().get(postNumber-1).getLikers().size()== 0){
+                                if(user.getPostList().get(postNumber-1).getLikers().size()== 0)
+                                {
                                     System.out.println("No likes");
                                     break;
                                 }
-                                else{
+                                else
+                                    {
                                     for (int i = 0 ; i<user.getPostList().get(postNumber-1).getLikers().size();i++){
                                         System.out.println(user.getPostList().get(postNumber-1).getLikers().get(i).getName());
                                     }
                                     break;
                                 }
-                            //adds post to favlist
+                                //adds post to favlist
                             case 5:
                                 PostList = user.getFavPosts();
                                 PostList.add(user.getPostList().get(postNumber-1));
@@ -418,44 +486,55 @@ public class UserPanel{
                             case 6 :
                                 mp.getMainPage(user);
                                 break;
-                             }
-                         }
+                        }
+                    }
                     break;
+
                 //Shows user his contact list
                 case 8:
-                    if(user.getFollowedList().size() == 0){
+                    if(user.getFollowedList().size() == 0)
+                    {
                         System.out.println("___________________");
                         System.out.println("You are follow 0 user, please follow someone to socialize.");
                         System.out.println("___________________");
                         break;
                     }
-                    else{
+                    else
+                        {
                         System.out.println("You are follow "+ user.getFollowedList().size() +" user:");
                         System.out.println("___________________");
-                        for (int i = 0; i < user.getFollowedList().size(); i++){
+                        for (int i = 0; i < user.getFollowedList().size(); i++)
+                        {
                             System.out.println(user.getFollowedList().get(i).getName());
                         }
                         break;
                     }
-                //Shows your followers
+
+                    //Shows your followers
                 case 9:
-                    
+
                     System.out.println("\nYour followers are:");
                     System.out.println("___________________");
-                    for(int i = 0;i < userlist.size();i++){
+
+                    for(int i = 0;i < userlist.size();i++)
+                    {
                         //if he follows user prints his name
-                        if(Following.IsFollow(userlist.get(i),user)){
+                        if(Following.IsFollow(userlist.get(i),user))
+                        {
                             System.out.println(userlist.get(i).getName());
                         }
                     }
                     System.out.println("___________________");
                     break;
+
                 //Shows all users who you're not following for our user and gives him follow option
                 case 10:
                     System.out.println("___________________");
                     System.out.println("All users in our system are:\n");
+
                     //prints all users who you're not following in system
-                    for (int i = 1; i < Following.getRemainingUsers().size(); i++){
+                    for (int i = 1; i < Following.getRemainingUsers().size(); i++)
+                    {
                         System.out.println(i + " " + Following.getRemainingUsers().get(i).getName());
                     }
 
@@ -469,44 +548,52 @@ public class UserPanel{
                     System.out.println("You followed " +  user.getFollowedList().get(number).getName());
                     System.out.println("___________________");
                     break;
+
                 //Shows all users who you are following
                 case 11:
-                    if(user.getFollowedList().size() == 0){
+                    if(user.getFollowedList().size() == 0)
+                    {
                         System.out.println("___________________");
                         System.out.println("You are not following anyone.");
                         System.out.println("___________________");
                         break;
                     }
-                    else{
-                            System.out.println("___________________");
-                            System.out.println("All users who you are following\n");
 
-                            for(int i = 0; i < user.getFollowedList().size(); i++){
-                                System.out.println(i+1 +" "+ user.getFollowedList().get(i).getName());
-                            }
-                            System.out.println("Please choose the user who you want to unfollow");
-                            int select1 = scanner.nextInt();
-                            scanner.nextLine();
+                    else
+                        {
+                        System.out.println("___________________");
+                        System.out.println("All users who you are following\n");
 
-                            //Holds name
-                            String name = user.getFollowedList().get(select1-1).getName();
-
-                            //makes you unfollow user who you choose
-                            Following.Unfollow(user, user.getFollowedList().get(select1-1));
-                            System.out.println("___________________");
-                            System.out.println("You unfollowed " +  name);
-                            System.out.println("___________________");
-                            break;
+                        for(int i = 0; i < user.getFollowedList().size(); i++)
+                        {
+                            System.out.println(i+1 +" "+ user.getFollowedList().get(i).getName());
                         }
-                // Shows user's notification box
+
+                        System.out.println("Please choose the user who you want to unfollow");
+                        int select1 = scanner.nextInt();
+                        scanner.nextLine();
+
+                        //Holds name
+                        String name = user.getFollowedList().get(select1-1).getName();
+
+                        //makes you unfollow user who you choose
+                        Following.Unfollow(user, user.getFollowedList().get(select1-1));
+                        System.out.println("___________________");
+                        System.out.println("You unfollowed " +  name);
+                        System.out.println("___________________");
+                        break;
+                    }
+                    // Shows user's notification box
                 case 12 :
-                    if(user.getFavPosts().size()==0){
+                    if(user.getFavPosts().size()==0)
+                    {
                         System.out.println("___________________");
                         System.out.println("You have not any favourite posts, go and fav some post.");
                         System.out.println("___________________");
                         break;
                     }
-                    else{
+                    else
+                        {
                         for(int i = 0; i < user.getFavPosts().size(); i++){
                             System.out.println("___________________");
                             System.out.println(user.getFavPosts().get(i).getSharer()+"\n");
@@ -514,11 +601,14 @@ public class UserPanel{
                             System.out.println(user.getFavPosts().get(i).getLikes() + " Likes");
                             System.out.println(user.getFavPosts().get(i).getComments().size()+" Comments");
 
-                            if(user.getFavPosts().get(i).getComments().size() == 0){
+                            if(user.getFavPosts().get(i).getComments().size() == 0)
+                            {
                                 System.out.println("There is no comment to show.");
                                 break;
+
                             }
-                            else{
+                            else
+                                {
                                 System.out.println("Comments :\n___________________");
                                 for(int x=0; x<user.getFavPosts().get(i).getComments().size(); x++){
                                     System.out.println(user.getFavPosts().get(i).getComments().get(x));
@@ -527,15 +617,19 @@ public class UserPanel{
                             System.out.println("___________________");
                         }
                         break;
+
                     }
+                    //Shows notification box
                 case 13:
-                    if( user.getNotificationBox().size() == 0){
+                    if( user.getNotificationBox().size() == 0)
+                    {
                         System.out.println("___________________");
                         System.out.println("You have 0 Notifications.");
                         System.out.println("___________________");
                         break;
+
                     }
-                    
+
                     System.out.println("___________________");
                     user.ShowNotifications();
                     System.out.println("___________________");
