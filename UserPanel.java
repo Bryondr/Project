@@ -143,7 +143,8 @@ public class UserPanel
                         System.out.println("____________");
                         break;
                     }
-                    else{
+                    else
+                    {
                         System.out.println("_______________\nOutbox:");
                         for(int i =0;i < user.getOutgoing().size();i++)
                         {
@@ -366,11 +367,11 @@ public class UserPanel
                         break;
                     }
 
-
                     //Shows user's main page
                 case 7:
                     System.out.println("Main Page:");
                     mp.getMainPage(user);
+                    
                     if(user.getPostList().size() == 0)
                     {
                         System.out.println("___________________");
@@ -378,6 +379,7 @@ public class UserPanel
                         System.out.println("___________________");
                         break;
                     }
+                    
                     else
                     {
                         System.out.println("Choose the post number for show post operations");
@@ -398,7 +400,6 @@ public class UserPanel
 
                         switch (postAction)
                         {
-
                             //Adds 1 like for post which our user selects
                             case 1 :
                                 user.getPostList().get(postNumber-1).Like();
