@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 public class Register
 {
+    //Register panel for user
     public UserClass Registering()
     {
         Scanner scanner = new Scanner(System.in);
