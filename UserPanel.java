@@ -1,10 +1,11 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class UserPanel{
+public class UserPanel
+{
 
-    public static void main(String args[]){
-
+    public static void main(String args[])
+    {
         //controls all main page for any user
         MainPage mp = new MainPage();
 
