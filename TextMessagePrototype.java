@@ -42,7 +42,7 @@ public class TextMessage extends Message {
         FollowSystem Following = new FollowSystem();
         //constructs message for person
         setSenderPerson(user1.getName());
-        setSenderPerson(user2.getName());
+        setGetterPerson(user2.getName());
         setMessage(message);
 
         //controls if user is followed
@@ -112,3 +112,4 @@ public class TextMessage extends Message {
 
     }
 }
+
