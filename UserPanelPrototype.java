@@ -71,7 +71,7 @@ public class UserPanel
         Post otherpost6 = new Post(user1.getName()," ",0,0);
         Post otherpost7 = new Post(user1.getName()," ",0,0);
         TextMessage message1 = new TextMessage();
-        TextMessage message2 = new TextMessage();
+        FileMessage message2 = new FileMessage();
 
         int exit = 0;
         //Panel
@@ -93,8 +93,8 @@ public class UserPanel
             System.out.println("Enter any number for exit.");
 
             //sends message from another user to our user
-            message1.SendMessage(user1,user,"Welcome our platform");
-            message2.SendMessage(user2,user,"Welcome our platform");
+            message1.SendMessage(user1,user,"Welcome to our platform");
+            message2.SendMessage(user2,user,"Welcome to our platform","Welcome.GIF");
 
             //shares others posts and controls when someone follows they can see the posts in their main page
             otherpost1.sharePost(user1,Following,"I created this platform.");
