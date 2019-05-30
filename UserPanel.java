@@ -6,13 +6,14 @@ public class UserPanel
 
     public static void main(String args[])
     {
+
         //controls all main page for any user
         MainPage mp = new MainPage();
 
         //controls all timeline for any user
         TimeLine timeLine = new TimeLine();
 
-        //creates an ArrayList for any usage of array<userclass>
+        //creates an ArrayList for any usage of array<UserClass>
         ArrayList<UserClass> list = new ArrayList<UserClass>();
 
         //creates an ArrayList for any usage of array<post>
@@ -40,12 +41,15 @@ public class UserPanel
         //Follow system which controls all follow operations
         FollowSystem Following = new FollowSystem();
 
-        //It runs for our user controls if his birthday or not and if it is sends message to notification box
-        Admin.CallBirthday(user);
-
         //Holds all userlist for any use
         ArrayList<UserClass> userlist = new ArrayList<>();
         userlist = UserClass.getUserlist();
+
+        //It runs for all users, controls if their birthday is today or not and if it is sends message to notification box
+        for (int i =0; i < userlist.size();i++)
+        {
+            Admin.CallBirthday(userlist.get(i));
+        }
 
         //Makes some users to follow our user
         list = user1.getFollowedList();
@@ -69,8 +73,8 @@ public class UserPanel
         Post otherpost5 = new Post(user1.getName()," ",0,0);
         Post otherpost6 = new Post(user1.getName()," ",0,0);
         Post otherpost7 = new Post(user1.getName()," ",0,0);
-        Message message1 = new Message();
-        Message message2 = new Message();
+        TextMessage message1 = new TextMessage();
+        FileMessage message2 = new FileMessage();
 
         int exit = 0;
         //Panel
@@ -92,8 +96,8 @@ public class UserPanel
             System.out.println("Enter any number for exit.");
 
             //sends message from another user to our user
-            message1.SendMessage(user1,user,"Welcome our platform","Hello.png");
-            message2.SendMessage(user2,user,"Welcome our platform","Welcome.gif");
+            message1.SendMessage(user1,user,"Welcome to our platform");
+            message2.SendMessage(user2,user,"Welcome to our platform","Welcome.GIF");
 
             //shares others posts and controls when someone follows they can see the posts in their main page
             otherpost1.sharePost(user1,Following,"I created this platform.");
@@ -121,15 +125,31 @@ public class UserPanel
                         break;
                     }
                     else
-                        {
+                    {
                         System.out.println("_______________\nInbox:");
                         for(int i =0;i < user.getIncoming().size();i++)
                         {
-                            System.out.println("____________");
-                            System.out.println("From :"+user.getIncoming().get(i).getSenderPerson());
-                            System.out.println("\nMessage: \n"+user.getIncoming().get(i).getMessage());
-                            System.out.println("Content : \n"+user.getIncoming().get(i).getContent());
-                            System.out.println("____________");
+                            if(user.getIncoming().get(i) instanceof FileMessage)
+                            {
+                                //type casting
+                                FileMessage fileMessage =(FileMessage) user.getIncoming().get(i);
+
+                                System.out.println("____________");
+                                System.out.println("From :" + fileMessage.getSenderPerson());
+                                System.out.println("\nMessage: \n" + fileMessage.getMessage());
+                                System.out.println("Content : \n" + fileMessage.getFileName());
+                                System.out.println("____________");
+                            }
+                            else
+                            {
+                                //type casting
+                                TextMessage textMessage =(TextMessage) user.getIncoming().get(i);
+
+                                System.out.println("____________");
+                                System.out.println("From :" + textMessage.getSenderPerson());
+                                System.out.println("\nMessage: \n" + textMessage.getMessage());
+                                System.out.println("____________");
+                            }
                         }
                         break;
                     }
@@ -143,14 +163,33 @@ public class UserPanel
                         break;
                     }
                     else
-                        {
+                    {
+
                         System.out.println("_______________\nOutbox:");
-                        for(int i =0;i < user.getOutgoing().size();i++){
-                            System.out.println("_______________");
-                            System.out.println("To :"+user.getOutgoing().get(i).getGetterPerson());
-                            System.out.println("\nMessage: \n"+user.getOutgoing().get(i).getMessage());
-                            System.out.println("Content : \n"+user.getOutgoing().get(i).getContent());
-                            System.out.println("_______________");
+                        for(int i =0;i < user.getOutgoing().size();i++)
+                        {
+                            if(user.getOutgoing().get(i) instanceof FileMessage)
+                            {
+                                //type casting
+                                FileMessage fileMessage = (FileMessage) user.getOutgoing().get(i);
+
+                                System.out.println("_______________");
+                                System.out.println("To :" + fileMessage.getGetterPerson());
+                                System.out.println("\nMessage: \n" + fileMessage.getMessage());
+                                System.out.println("File : \n" + fileMessage.getFileName());
+                                System.out.println("_______________");
+                            }
+
+                            else
+                            {
+                                //type casting
+                                TextMessage textMessage = (TextMessage) user.getOutgoing().get(i);
+
+                                System.out.println("_______________");
+                                System.out.println("To :" + textMessage.getGetterPerson());
+                                System.out.println("\nMessage: \n" + textMessage.getMessage());
+                                System.out.println("_______________");
+                            }
                         }
                         break;
                     }
@@ -165,10 +204,31 @@ public class UserPanel
                     }
 
                     else
+                    {
+                        System.out.println("Please choose what type of message you will send:");
+                        System.out.println("1. Text message");
+                        System.out.println("2.File message");
+                        int selection = scanner.nextInt();
+                        scanner.nextLine();
+                        if (selection == 1)
                         {
-                        Message message = new Message();
-                        System.out.println("\n");
-                        message.MessagingPanel(user);
+                            TextMessage message = new TextMessage();
+                            System.out.println("\n");
+                            message.MessagingPanel(user);
+
+                        }
+                        else if (selection == 2)
+                        {
+                            FileMessage message = new FileMessage();
+                            System.out.println("\n");
+                            message.MessagingPanel(user);
+
+                        }
+
+                        else
+                        {
+                            System.out.println("Wrong operation number please try again!");
+                        }
                     }
                     break;
 
@@ -192,7 +252,7 @@ public class UserPanel
                     }
 
                     else
-                        {
+                    {
                         System.out.println("Choose the post number for showing post operations");
 
                         int tPostNumber = scanner.nextInt();
@@ -244,7 +304,7 @@ public class UserPanel
                                     break;
                                 }
                                 else
-                                    {
+                                {
                                     System.out.println("Comments :\n__________________");
                                     for(int i=0;i<user.getTimeLine().get(tPostNumber-1).getComments().size();i++)
                                     {
@@ -259,7 +319,7 @@ public class UserPanel
                                     break;
                                 }
                                 else
-                                    {
+                                {
                                     for (int i = 0 ; i<user.getPostList().get(tPostNumber-1).getLikers().size();i++)
                                     {
                                         System.out.println(user.getPostList().get(tPostNumber-1).getLikers().get(i).getName());
@@ -304,7 +364,7 @@ public class UserPanel
                         break;
                     }
                     else
-                        {
+                    {
 
                         System.out.println("Choose the post number for showing post operations");
 
@@ -357,7 +417,7 @@ public class UserPanel
                                     break;
                                 }
                                 else
-                                    {
+                                {
                                     System.out.println("Comments :\n__________________");
                                     for(int i=0;i<userlist.get(selectU).getTimeLine().get(tPostNumber-1).getComments().size();i++)
                                     {
@@ -372,7 +432,7 @@ public class UserPanel
                                     break;
                                 }
                                 else
-                                    {
+                                {
                                     for (int i = 0 ; i<userlist.get(selectU).getPostList().get(tPostNumber-1).getLikers().size();i++)
                                     {
                                         System.out.println(userlist.get(selectU).getPostList().get(tPostNumber-1).getLikers().get(i).getName());
@@ -403,7 +463,7 @@ public class UserPanel
                     }
 
                     else
-                        {
+                    {
                         System.out.println("Choose the post number for show post operations");
 
                         int postNumber = scanner.nextInt();
@@ -436,7 +496,7 @@ public class UserPanel
                                         user.getPostList().get(postNumber-1).setLikers(list);
                                     }
                                 }
-                                
+
                                 list = user.getPostList().get(postNumber-1).getLikers();
                                 list.add(user);
                                 user.getPostList().get(postNumber-1).setLikers(list);
@@ -455,7 +515,7 @@ public class UserPanel
                                     break;
                                 }
                                 else
-                                    {
+                                {
                                     System.out.println("Comments :\n__________________");
                                     for(int i=0;i<user.getPostList().get(postNumber-1).getComments().size();i++)
                                     {
@@ -471,7 +531,7 @@ public class UserPanel
                                     break;
                                 }
                                 else
-                                    {
+                                {
                                     for (int i = 0 ; i<user.getPostList().get(postNumber-1).getLikers().size();i++){
                                         System.out.println(user.getPostList().get(postNumber-1).getLikers().get(i).getName());
                                     }
@@ -501,7 +561,7 @@ public class UserPanel
                         break;
                     }
                     else
-                        {
+                    {
                         System.out.println("You are follow "+ user.getFollowedList().size() +" user:");
                         System.out.println("___________________");
                         for (int i = 0; i < user.getFollowedList().size(); i++)
@@ -561,7 +621,7 @@ public class UserPanel
                     }
 
                     else
-                        {
+                    {
                         System.out.println("___________________");
                         System.out.println("All users who you are following\n");
 
@@ -594,7 +654,7 @@ public class UserPanel
                         break;
                     }
                     else
-                        {
+                    {
                         for(int i = 0; i < user.getFavPosts().size(); i++){
                             System.out.println("___________________");
                             System.out.println(user.getFavPosts().get(i).getSharer()+"\n");
@@ -609,7 +669,7 @@ public class UserPanel
 
                             }
                             else
-                                {
+                            {
                                 System.out.println("Comments :\n___________________");
                                 for(int x=0; x<user.getFavPosts().get(i).getComments().size(); x++){
                                     System.out.println(user.getFavPosts().get(i).getComments().get(x));
