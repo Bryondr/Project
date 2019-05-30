@@ -243,6 +243,7 @@ public class UserPanel
                 case 5:
                     System.out.println("Time Line:");
                     timeLine.getTimeLine(user);
+                    //controls timeline
                     if(user.getTimeLine().size() == 0)
                     {
                         System.out.println("___________________");
@@ -251,94 +252,92 @@ public class UserPanel
                         break;
                     }
 
-                    else
-                    {
+                    else {
                         System.out.println("Choose the post number for showing post operations");
 
                         int tPostNumber = scanner.nextInt();
                         scanner.nextLine();//dummy;
-                        timeLine.getTimeLine(user, tPostNumber);
 
-                        System.out.println("Enter 1 to like the post 1 \n" +
-                                "Enter 2 to comment the post \n" +
-                                "Enter 3 for showing comments \n" +
-                                "Enter 4 for showing likers\n"+
-                                "Enter 5 for adding this post to your favourite list\n"+
-                                "Enter 6 for returning your Time Line \n" +
-                                "Enter another number for returning User panel.");
-                        int tPostAction = scanner.nextInt();
-                        scanner.nextLine();//dummy;
-
-                        switch (tPostAction){
-
-                            //Adds 1 like for post which our user selects
-                            case 1 :
-                                user.getTimeLine().get(tPostNumber-1).Like();
-                                for (int i = 0 ; i < user.getTimeLine().get(tPostNumber-1).getLikers().size(); i++)
-                                {
-                                    //Controls if user likes it 2 times it doesn't add him 2 times
-                                    if (user.equals(user.getTimeLine().get(tPostNumber-1).getLikers().get(i)))
-                                    {
-                                        list = user.getTimeLine().get(tPostNumber-1).getLikers();
-                                        list.remove(user);
-                                        user.getTimeLine().get(tPostNumber-1).setLikers(list);
-                                    }
-                                }
-
-                                list = user.getTimeLine().get(tPostNumber-1).getLikers();
-                                list.add(user);
-                                user.getTimeLine().get(tPostNumber-1).setLikers(list);
-                                break;
-
-                            //Opens comment page for user
-                            case 2 :
-                                user.getTimeLine().get(tPostNumber-1).Comment(user);
-                                break;
-
-                            //Prints all comments for selected post
-                            case 3 :
-                                timeLine.getTimeLine(user, tPostNumber);
-                                if(user.getTimeLine().get(tPostNumber-1).getComments().size() == 0)
-                                {
-                                    System.out.println("There is no comment to show. You can write the first comment.");
-                                    break;
-                                }
-                                else
-                                {
-                                    System.out.println("Comments :\n__________________");
-                                    for(int i=0;i<user.getTimeLine().get(tPostNumber-1).getComments().size();i++)
-                                    {
-                                        System.out.println(user.getTimeLine().get(tPostNumber - 1).getComments().get(i));
-                                    }
-                                    break;
-                                }
-                            case 4:
-                                if(user.getPostList().get(tPostNumber-1).getLikers().size()== 0)
-                                {
-                                    System.out.println("No likes");
-                                    break;
-                                }
-                                else
-                                {
-                                    for (int i = 0 ; i<user.getPostList().get(tPostNumber-1).getLikers().size();i++)
-                                    {
-                                        System.out.println(user.getPostList().get(tPostNumber-1).getLikers().get(i).getName());
-                                    }
-                                    break;
-                                }
-                            case 5:
-                                PostList = user.getFavPosts();
-                                PostList.add(user.getTimeLine().get(tPostNumber-1));
-                                user.setFavPosts(PostList);
-                                break;
-                            //Gets main page for user
-                            case 6 :
-                                timeLine.getTimeLine(user);
-                                break;
+                        //controls users post select number
+                        if (tPostNumber > user.getTimeLine().size() || tPostNumber < 0)
+                        {
+                            System.out.println("Wrong post number please try again!");
+                            break;
                         }
-                        break;
-                    }
 
+                        else
+                        {
+                            timeLine.getTimeLine(user, tPostNumber);
+                            System.out.println("Enter 1 to like the post 1 \n" +
+                                    "Enter 2 to comment the post \n" +
+                                    "Enter 3 for showing comments \n" +
+                                    "Enter 4 for showing likers\n" +
+                                    "Enter 5 for adding this post to your favourite list\n" +
+                                    "Enter 6 for returning your Time Line \n" +
+                                    "Enter another number for returning User panel.");
+                            int tPostAction = scanner.nextInt();
+                            scanner.nextLine();//dummy;
+
+                            switch (tPostAction) {
+
+                                //Adds 1 like for post which our user selects
+                                case 1:
+                                    user.getTimeLine().get(tPostNumber - 1).Like();
+                                    for (int i = 0; i < user.getTimeLine().get(tPostNumber - 1).getLikers().size(); i++) {
+                                        //Controls if user likes it 2 times it doesn't add him 2 times
+                                        if (user.equals(user.getTimeLine().get(tPostNumber - 1).getLikers().get(i))) {
+                                            list = user.getTimeLine().get(tPostNumber - 1).getLikers();
+                                            list.remove(user);
+                                            user.getTimeLine().get(tPostNumber - 1).setLikers(list);
+                                        }
+                                    }
+
+                                    list = user.getTimeLine().get(tPostNumber - 1).getLikers();
+                                    list.add(user);
+                                    user.getTimeLine().get(tPostNumber - 1).setLikers(list);
+                                    break;
+
+                                //Opens comment page for user
+                                case 2:
+                                    user.getTimeLine().get(tPostNumber - 1).Comment(user);
+                                    break;
+
+                                //Prints all comments for selected post
+                                case 3:
+                                    timeLine.getTimeLine(user, tPostNumber);
+                                    if (user.getTimeLine().get(tPostNumber - 1).getComments().size() == 0) {
+                                        System.out.println("There is no comment to show. You can write the first comment.");
+                                        break;
+                                    } else {
+                                        System.out.println("Comments :\n__________________");
+                                        for (int i = 0; i < user.getTimeLine().get(tPostNumber - 1).getComments().size(); i++) {
+                                            System.out.println(user.getTimeLine().get(tPostNumber - 1).getComments().get(i));
+                                        }
+                                        break;
+                                    }
+                                case 4:
+                                    if (user.getPostList().get(tPostNumber - 1).getLikers().size() == 0) {
+                                        System.out.println("No likes");
+                                        break;
+                                    } else {
+                                        for (int i = 0; i < user.getPostList().get(tPostNumber - 1).getLikers().size(); i++) {
+                                            System.out.println(user.getPostList().get(tPostNumber - 1).getLikers().get(i).getName());
+                                        }
+                                        break;
+                                    }
+                                case 5:
+                                    PostList = user.getFavPosts();
+                                    PostList.add(user.getTimeLine().get(tPostNumber - 1));
+                                    user.setFavPosts(PostList);
+                                    break;
+                                //Gets main page for user
+                                case 6:
+                                    timeLine.getTimeLine(user);
+                                    break;
+                            }
+                            break;
+                        }
+                    }
                 case 6:
                     System.out.println("___________________");
                     System.out.println("Please select whose timeline do you want to see:");
@@ -352,103 +351,109 @@ public class UserPanel
                     int selectU = scanner.nextInt();
                     scanner.nextLine(); //dummy
 
-                    timeLine.getTimeLine(userlist.get(selectU));
-
-                    //prints selected users timeline
-                    //controls if he has post in his timeline
-                    if(userlist.get(selectU).getTimeLine().size() == 0)
+                    //controls selected user input
+                    if(selectU > userlist.size() || selectU<1)
                     {
-                        System.out.println("___________________");
-                        System.out.println("His/Her Time Line is empty.");
-                        System.out.println("___________________");
+                        System.out.println("Wrong user number please try again!");
                         break;
                     }
-                    else
-                    {
 
-                        System.out.println("Choose the post number for showing post operations");
+                    else {
+                        timeLine.getTimeLine(userlist.get(selectU));
 
-                        int tPostNumber = scanner.nextInt();
-                        scanner.nextLine();//dummy;
-                        timeLine.getTimeLine(userlist.get(selectU), tPostNumber);
-
-                        System.out.println("Enter 1 to like the post\n" +
-                                "Enter 2 to comment the post \n" +
-                                "Enter 3 for showing comments \n" +
-                                "Enter 4 for showing likers\n"+
-                                "Enter 5 for adding this post to your favourite list\n"+
-                                "Enter another number for returning User panel.");
-                        int tPostAction = scanner.nextInt();
-                        scanner.nextLine();//dummy;
-
-                        switch (tPostAction)
+                        //prints selected users timeline
+                        //controls if he has post in his timeline
+                        if (userlist.get(selectU).getTimeLine().size() == 0)
                         {
-                            //Adds 1 like for post which our user selects
-                            case 1 :
-                                userlist.get(selectU).getTimeLine().get(tPostNumber-1).Like();
-
-                                for (int i = 0 ; i < userlist.get(selectU).getTimeLine().get(tPostNumber-1).getLikers().size(); i++)
-                                {
-                                    //Controls if user likes it 2 times it doesn't add him 2 times
-                                    if (user.equals(userlist.get(selectU).getTimeLine().get(tPostNumber-1).getLikers().get(i)))
-                                    {
-                                        list = userlist.get(selectU).getTimeLine().get(tPostNumber-1).getLikers();
-                                        list.remove(user);
-                                        userlist.get(selectU).getTimeLine().get(tPostNumber-1).setLikers(list);
-                                    }
-                                }
-
-                                list = userlist.get(selectU).getTimeLine().get(tPostNumber-1).getLikers();
-                                list.add(user);
-                                userlist.get(selectU).getTimeLine().get(tPostNumber-1).setLikers(list);
-                                break;
-
-                            //Opens comment page for user
-                            case 2 :
-                                userlist.get(selectU).getTimeLine().get(tPostNumber-1).Comment(user);
-                                break;
-
-                            //Prints all comments for selected post
-                            case 3 :
-                                timeLine.getTimeLine(userlist.get(selectU), tPostNumber);
-                                if(userlist.get(selectU).getTimeLine().get(tPostNumber-1).getComments().size() == 0)
-                                {
-                                    System.out.println("There is no comment to show. You can write the first comment.");
-                                    break;
-                                }
-                                else
-                                {
-                                    System.out.println("Comments :\n__________________");
-                                    for(int i=0;i<userlist.get(selectU).getTimeLine().get(tPostNumber-1).getComments().size();i++)
-                                    {
-                                        System.out.println(userlist.get(selectU).getTimeLine().get(tPostNumber - 1).getComments().get(i));
-                                    }
-                                    break;
-                                }
-                            case 4:
-                                if(userlist.get(selectU).getPostList().get(tPostNumber-1).getLikers().size()== 0)
-                                {
-                                    System.out.println("No likes");
-                                    break;
-                                }
-                                else
-                                {
-                                    for (int i = 0 ; i<userlist.get(selectU).getPostList().get(tPostNumber-1).getLikers().size();i++)
-                                    {
-                                        System.out.println(userlist.get(selectU).getPostList().get(tPostNumber-1).getLikers().get(i).getName());
-                                    }
-                                    break;
-                                }
-                                //adds this post to our user's fav list
-                            case 5:
-                                PostList = userlist.get(selectU).getFavPosts();
-                                PostList.add(userlist.get(selectU).getTimeLine().get(tPostNumber-1));
-                                user.setFavPosts(PostList);
-                                break;
+                            System.out.println("___________________");
+                            System.out.println("His/Her Time Line is empty.");
+                            System.out.println("___________________");
+                            break;
                         }
-                        break;
-                    }
 
+                        else {
+                            System.out.println("Choose the post number for showing post operations");
+                            int tPostNumber = scanner.nextInt();
+                            scanner.nextLine();//dummy;
+
+                            //controls users selected post input
+                            if (tPostNumber > userlist.get(selectU).getTimeLine().size() || tPostNumber < 0)
+                            {
+                                System.out.println("Wrong post number please try again!");
+                                break;
+                            }
+
+                            else {
+                                timeLine.getTimeLine(userlist.get(selectU), tPostNumber);
+
+
+                                System.out.println("Enter 1 to like the post\n" +
+                                        "Enter 2 to comment the post \n" +
+                                        "Enter 3 for showing comments \n" +
+                                        "Enter 4 for showing likers\n" +
+                                        "Enter 5 for adding this post to your favourite list\n" +
+                                        "Enter another number for returning User panel.");
+                                int tPostAction = scanner.nextInt();
+                                scanner.nextLine();//dummy;
+
+                                switch (tPostAction) {
+                                    //Adds 1 like for post which our user selects
+                                    case 1:
+                                        userlist.get(selectU).getTimeLine().get(tPostNumber - 1).Like();
+
+                                        for (int i = 0; i < userlist.get(selectU).getTimeLine().get(tPostNumber - 1).getLikers().size(); i++) {
+                                            //Controls if user likes it 2 times it doesn't add him 2 times
+                                            if (user.equals(userlist.get(selectU).getTimeLine().get(tPostNumber - 1).getLikers().get(i))) {
+                                                list = userlist.get(selectU).getTimeLine().get(tPostNumber - 1).getLikers();
+                                                list.remove(user);
+                                                userlist.get(selectU).getTimeLine().get(tPostNumber - 1).setLikers(list);
+                                            }
+                                        }
+
+                                        list = userlist.get(selectU).getTimeLine().get(tPostNumber - 1).getLikers();
+                                        list.add(user);
+                                        userlist.get(selectU).getTimeLine().get(tPostNumber - 1).setLikers(list);
+                                        break;
+
+                                    //Opens comment page for user
+                                    case 2:
+                                        userlist.get(selectU).getTimeLine().get(tPostNumber - 1).Comment(user);
+                                        break;
+
+                                    //Prints all comments for selected post
+                                    case 3:
+                                        timeLine.getTimeLine(userlist.get(selectU), tPostNumber);
+                                        if (userlist.get(selectU).getTimeLine().get(tPostNumber - 1).getComments().size() == 0) {
+                                            System.out.println("There is no comment to show. You can write the first comment.");
+                                            break;
+                                        } else {
+                                            System.out.println("Comments :\n__________________");
+                                            for (int i = 0; i < userlist.get(selectU).getTimeLine().get(tPostNumber - 1).getComments().size(); i++) {
+                                                System.out.println(userlist.get(selectU).getTimeLine().get(tPostNumber - 1).getComments().get(i));
+                                            }
+                                            break;
+                                        }
+                                    case 4:
+                                        if (userlist.get(selectU).getPostList().get(tPostNumber - 1).getLikers().size() == 0) {
+                                            System.out.println("No likes");
+                                            break;
+                                        } else {
+                                            for (int i = 0; i < userlist.get(selectU).getPostList().get(tPostNumber - 1).getLikers().size(); i++) {
+                                                System.out.println(userlist.get(selectU).getPostList().get(tPostNumber - 1).getLikers().get(i).getName());
+                                            }
+                                            break;
+                                        }
+                                        //adds this post to our user's fav list
+                                    case 5:
+                                        PostList = userlist.get(selectU).getFavPosts();
+                                        PostList.add(userlist.get(selectU).getTimeLine().get(tPostNumber - 1));
+                                        user.setFavPosts(PostList);
+                                        break;
+                                }
+                                break;
+                            }
+                        }
+                    }
                     //Shows user's main page
                 case 7:
                     System.out.println("Main Page:");
@@ -462,91 +467,90 @@ public class UserPanel
                         break;
                     }
 
-                    else
-                    {
+                    else {
                         System.out.println("Choose the post number for show post operations");
 
                         int postNumber = scanner.nextInt();
                         scanner.nextLine();//dummy;
-                        mp.getMainPage(user, postNumber);
 
-                        System.out.println("Enter 1 to like the post 1 \n" +
-                                "Enter 2 to comment the post \n" +
-                                "Enter 3 for showing comments \n" +
-                                "Enter 4 for showing likers\n"+
-                                "Enter 5 for adding this post to your favourite list\n"+
-                                "Enter 6 for returning your Time Line \n" +
-                                "Enter another number for returning User panel.");
-                        int postAction = scanner.nextInt();
-                        scanner.nextLine();//dummy;
-
-                        switch (postAction)
+                        //controls users post select input
+                        if (postNumber > user.getPostList().size() || postNumber < 0)
                         {
-                            //Adds 1 like for post which our user selects
-                            case 1 :
-                                user.getPostList().get(postNumber-1).Like();
+                            System.out.println("Wrong post number please try again!");
+                            break;
+                        }
 
-                                for (int i = 0 ; i < user.getPostList().get(postNumber-1).getLikers().size(); i++)
-                                {
-                                    //Controls if user likes it 2 times it doesn't add him 2 times
-                                    if (user.equals(user.getPostList().get(postNumber-1).getLikers().get(i)))
-                                    {
-                                        list = user.getPostList().get(postNumber-1).getLikers();
-                                        list.remove(user);
-                                        user.getPostList().get(postNumber-1).setLikers(list);
-                                    }
-                                }
+                        else {
+                            mp.getMainPage(user, postNumber);
 
-                                list = user.getPostList().get(postNumber-1).getLikers();
-                                list.add(user);
-                                user.getPostList().get(postNumber-1).setLikers(list);
-                                break;
+                            System.out.println("Enter 1 to like the post 1 \n" +
+                                    "Enter 2 to comment the post \n" +
+                                    "Enter 3 for showing comments \n" +
+                                    "Enter 4 for showing likers\n" +
+                                    "Enter 5 for adding this post to your favourite list\n" +
+                                    "Enter 6 for returning your Time Line \n" +
+                                    "Enter another number for returning User panel.");
+                            int postAction = scanner.nextInt();
+                            scanner.nextLine();//dummy;
 
-                            //Opens comment page for user
-                            case 2 :
-                                user.getPostList().get(postNumber-1).Comment(user);
-                                break;
-                            //Prints all comments for selected post
-                            case 3 :
-                                mp.getMainPage(user, postNumber);
-                                if(user.getPostList().get(postNumber-1).getComments().size() == 0)
-                                {
-                                    System.out.println("There is no comment to show. You can write the first comment.");
-                                    break;
-                                }
-                                else
-                                {
-                                    System.out.println("Comments :\n__________________");
-                                    for(int i=0;i<user.getPostList().get(postNumber-1).getComments().size();i++)
-                                    {
-                                        System.out.println(user.getPostList().get(postNumber - 1).getComments().get(i));
+                            switch (postAction) {
+                                //Adds 1 like for post which our user selects
+                                case 1:
+                                    user.getPostList().get(postNumber - 1).Like();
+
+                                    for (int i = 0; i < user.getPostList().get(postNumber - 1).getLikers().size(); i++) {
+                                        //Controls if user likes it 2 times it doesn't add him 2 times
+                                        if (user.equals(user.getPostList().get(postNumber - 1).getLikers().get(i))) {
+                                            list = user.getPostList().get(postNumber - 1).getLikers();
+                                            list.remove(user);
+                                            user.getPostList().get(postNumber - 1).setLikers(list);
+                                        }
                                     }
+
+                                    list = user.getPostList().get(postNumber - 1).getLikers();
+                                    list.add(user);
+                                    user.getPostList().get(postNumber - 1).setLikers(list);
                                     break;
-                                }
-                                //show likers
-                            case 4:
-                                if(user.getPostList().get(postNumber-1).getLikers().size()== 0)
-                                {
-                                    System.out.println("No likes");
+
+                                //Opens comment page for user
+                                case 2:
+                                    user.getPostList().get(postNumber - 1).Comment(user);
                                     break;
-                                }
-                                else
-                                {
-                                    for (int i = 0 ; i<user.getPostList().get(postNumber-1).getLikers().size();i++){
-                                        System.out.println(user.getPostList().get(postNumber-1).getLikers().get(i).getName());
+                                //Prints all comments for selected post
+                                case 3:
+                                    mp.getMainPage(user, postNumber);
+                                    if (user.getPostList().get(postNumber - 1).getComments().size() == 0) {
+                                        System.out.println("There is no comment to show. You can write the first comment.");
+                                        break;
+                                    } else {
+                                        System.out.println("Comments :\n__________________");
+                                        for (int i = 0; i < user.getPostList().get(postNumber - 1).getComments().size(); i++) {
+                                            System.out.println(user.getPostList().get(postNumber - 1).getComments().get(i));
+                                        }
+                                        break;
                                     }
+                                    //show likers
+                                case 4:
+                                    if (user.getPostList().get(postNumber - 1).getLikers().size() == 0) {
+                                        System.out.println("No likes");
+                                        break;
+                                    } else {
+                                        for (int i = 0; i < user.getPostList().get(postNumber - 1).getLikers().size(); i++) {
+                                            System.out.println(user.getPostList().get(postNumber - 1).getLikers().get(i).getName());
+                                        }
+                                        break;
+                                    }
+                                    //adds post to favlist
+                                case 5:
+                                    PostList = user.getFavPosts();
+                                    PostList.add(user.getPostList().get(postNumber - 1));
+                                    user.setFavPosts(PostList);
                                     break;
-                                }
-                                //adds post to favlist
-                            case 5:
-                                PostList = user.getFavPosts();
-                                PostList.add(user.getPostList().get(postNumber-1));
-                                user.setFavPosts(PostList);
-                                break;
-                            //Gets main page for user
-                            case 6 :
-                                mp.getMainPage(user);
-                                break;
+                                //Gets main page for user
+                                case 6:
+                                    mp.getMainPage(user);
+                                    break;
+                            }
                         }
                     }
                     break;
