@@ -41,6 +41,9 @@ public class UserPanel
         //Follow system which controls all follow operations
         FollowSystem Following = new FollowSystem();
 
+        list = Following.getRemainingUsers();
+        list.remove(user);
+        Following.setRemainingUsers(list);
         //Holds all userlist for any use
         ArrayList<UserClass> userlist = new ArrayList<>();
         userlist = UserClass.getUserlist();
@@ -52,17 +55,11 @@ public class UserPanel
         }
 
         //Makes some users to follow our user
-        list = user1.getFollowedList();
-        list.add(user);
-        user1.setFollowedList(list);
-
-        list = user2.getFollowedList();
-        list.add(user);
-        user2.setFollowedList(list);
-
-        list = user3.getFollowedList();
-        list.add(user);
-        user3.setFollowedList(list);
+        //KANKA BURASI
+        Following.Follow(user1,user);
+        Following.Follow(user2,user);
+        Following.Follow(user3,user);
+        //KANKA BURASI
 
 
         //Creates others posts
@@ -592,15 +589,16 @@ public class UserPanel
                     System.out.println("___________________");
                     break;
 
+                //KANKA BURASI
                 //Shows all users who you're not following for our user and gives him follow option
                 case 10:
                     System.out.println("___________________");
                     System.out.println("All users in our system are:\n");
 
                     //prints all users who you're not following in system
-                    for (int i = 1; i < Following.getRemainingUsers().size(); i++)
+                    for (int i = 0; i < Following.getRemainingUsers().size(); i++)
                     {
-                        System.out.println(i + " " + Following.getRemainingUsers().get(i).getName());
+                        System.out.println(i+1 + " " + Following.getRemainingUsers().get(i).getName());
                     }
 
                     System.out.println("Please choose the user who you want to follow");
@@ -608,12 +606,13 @@ public class UserPanel
                     scanner.nextLine();
 
                     //makes you follow user who you choose
-                    Following.Follow(user, Following.getRemainingUsers().get(select));
+                    Following.Follow(user, Following.getRemainingUsers().get(select-1));
                     int number = user.getFollowedList().size()-1;
                     System.out.println("You followed " +  user.getFollowedList().get(number).getName());
                     System.out.println("___________________");
                     break;
-
+//KANKA BURANIN ÜSTÜ CASE 10
+                   
                 //Shows all users who you are following
                 case 11:
                     if(user.getFollowedList().size() == 0)
